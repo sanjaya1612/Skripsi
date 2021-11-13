@@ -1,2 +1,3 @@
 cd frontend
-npm i react-bootstrap
+npm i react-bootstrap@1.6.1
+npm install react-router-dom@5.2.0
