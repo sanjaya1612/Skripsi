@@ -1,19 +1,24 @@
+import React,{ useState, useEffect} from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
-import { Image } from 'react-bootstrap'
-import products from '../products'
-
+import axios from 'axios'
 
 const HomeScreen = () => {
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const {data} = await axios.get('/api/products')
+
+            setProducts(data)
+        }
+
+        fetchProducts()
+    }, [])
     return (
         <>
-            <body>
-                <header>
-                    
-                </header>
-            </body>
             <h1>Favorite Activities</h1>
             <br></br>
             <Row>
