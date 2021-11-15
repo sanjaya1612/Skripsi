@@ -7,3 +7,5 @@ root
 
 npm i express
 npm i -D nodemon concurrently
+npm i mongoose@5.13.7
+npm i express-async-handler

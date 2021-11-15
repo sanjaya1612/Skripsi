@@ -1,6 +1,5 @@
 const products = [
     {
-        _id: '1',
         name: 'Floating Breakfast',
         image: '/images/floating.jpg',
         description:
@@ -13,7 +12,6 @@ const products = [
         countInStock: 1,
     },
     {
-        _id: '2',
         name: 'Bali Zoo',
         image: '/images/balizoo.jpeg',
         description:
@@ -26,7 +24,6 @@ const products = [
         countInStock: 1,
     },
     {
-        _id: '3',
         name: 'Kecak Dance',
         image: '/images/kecak.jpg',
         description:
@@ -39,7 +36,6 @@ const products = [
         countInStock: 1,
     },
     {
-        _id: '4',
         name: 'Waterbom Bali',
         image: '/images/waterbom.jpg',
         description:
@@ -52,7 +48,6 @@ const products = [
         countInStock: 1,
     },
     {
-        _id: '5',
         name: 'Banana Boat',
         image: '/images/banana.jpg',
         description:
@@ -65,7 +60,6 @@ const products = [
         countInStock: 1,
     },
     {
-        _id: '6',
         name: 'Blue Lagoon (1 day)',
         image: '/images/snorkling.jpg',
         description:
