@@ -30,7 +30,7 @@ const CartScreen = ({ match, location, history }) => {
         <Row>
             <Col md={8}>
                 <h1>Shopping Cart</h1>
-                {cartItems.leght === 0 ? <Message>Your cart is empty<Link to='/'>Go Back</Link></Message> :
+                {cartItems.length === 0 ? <Message>Your cart is empty <Link to='/'>Go Back</Link></Message> :
                     (
                         <ListGroup variant='flush'>
                             {cartItems.map(item => (
@@ -45,7 +45,7 @@ const CartScreen = ({ match, location, history }) => {
                                         <Col md={2}>Rp.{item.price}</Col>
                                         <Col md={2}>
                                             <Form.Control
-                                                as='select'
+                                                as='Select'
                                                 value={item.qty}
                                                 onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}>
                                                 {[...Array(item.countInStock).keys()].map(x => (
@@ -73,7 +73,7 @@ const CartScreen = ({ match, location, history }) => {
                         </ListGroup.Item>
                     </ListGroup>
                     <ListGroup.Item>
-                        <Button type='button' clasName='btn-block' disabled={cartItems.leght === 0} onClick={checkoutHandler}>Proceed to Checkout</Button>
+                        <Button type='button' className='btn-block' disabled={cartItems.leght === 0} onClick={checkoutHandler}>Proceed to Checkout</Button>
                     </ListGroup.Item>
                 </Card>
             </Col>
