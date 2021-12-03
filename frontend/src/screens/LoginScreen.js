@@ -51,6 +51,7 @@ const LoginScreen = ({ location,history }) => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}></Form.Control>
                 </Form.Group>
+                <br/>
                 <Button type='submit' variant='primary'>Sign In</Button>
             </Form>
             <Row className='py-3'>

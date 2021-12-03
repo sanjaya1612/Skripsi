@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Container, Image } from 'react-bootstrap'
 import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -18,8 +18,39 @@ const HomeScreen = () => {
 
     return (
         <>
+            <Container>
+                <h1>What We Serve</h1>
+                <h2>Top Values For You...</h2>
+                <br />
+                <Row>
+                    <Col xs={6} md={4}>
+                        <Image src='/images/decide.svg' rounded width={200} />
+                        <h2 style={{ textAlign: 'center' }}>Lot of choices</h2>
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <Image src='/images/booking.svg' rounded width={200} />
+                        <h2 style={{ textAlign: 'center' }}>Easy booking</h2>
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <Image src='/images/secure.svg' rounded width={200} />
+                        <h2 style={{ textAlign: 'center' }}>Trusted</h2>
+                    </Col>
+                </Row>
+                <br />
+            </Container>
+            <Row>
+                <h2 style={{ textAlign: 'center' }}>About Us</h2>
+                <Col>
+                    <p style={{ textAlign: 'center' }}>Travel.id is a platform to make it easier for tourists to choose tourist destinations,
+                        besides that we also provide a gallery feature to see what tours are in an area of Indonesia,
+                        there is also a food feature to be able to buy food from an area and send it to you.</p>
+                </Col>
+            </Row>
+            <Container>
+
+            </Container>
             <h1>Favorite Activities</h1>
-            
+
             {loading ? (
                 <Loader />
             ) : error ? (

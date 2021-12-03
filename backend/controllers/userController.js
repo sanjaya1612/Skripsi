@@ -24,8 +24,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body
 
     const userExists = await User.findOne({ email })
-    
-    if(userExists){
+
+    if (userExists) {
         res.status(400)
         throw new Error('User already exists')
     }
@@ -35,7 +35,21 @@ const registerUser = asyncHandler(async (req, res) => {
         email,
         password
     })
-    
+    // if (name == "" || name == null) {
+    //     res.status(400)
+    //     throw new Error('Name can not be empty')
+    // } else if (email == "" || email == null) {
+    //     res.status(400)
+    //     throw new Error('Email can not be empty')
+    // } else if (user) {
+    //     res.status(201).json({
+    //         _id: user._id,
+    //         name: user.name,
+    //         email: user.email,
+    //         isAdmin: user.isAdmin,
+    //         token: generateToken(user._id),
+    //     })
+    // }
     if(user) {
         res.status(201).json({
             _id: user._id,
@@ -72,7 +86,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     if (user) {
         user.name = req.body.name || user.name
         user.email = req.body.email || user.email
-        if(req.body.password){
+        if (req.body.password) {
             user.password = req.body.password
         }
 

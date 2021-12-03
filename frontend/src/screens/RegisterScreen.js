@@ -28,7 +28,15 @@ const RegisterScreen = ({ location,history }) => {
     }, [history, userInfo, redirect])
     const submitHandler = (e) => {
         e.preventDefault()
-        if(password !== confirmPassword){
+        if(name === ""){
+            setMessage('Name can not be empty')
+        }else if(email === ""){
+            setMessage('Email can not be empty')
+        }else if(password === ""){
+            setMessage('Password can not be empty')
+        }else if(confirmPassword === ""){
+            setMessage('Confirm password can not be empty')
+        }else if(password !== confirmPassword){
             setMessage('Passwords do not match')
         }else{
             dispatch(register(name, email, password))
@@ -83,6 +91,7 @@ const RegisterScreen = ({ location,history }) => {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
                 </Form.Group>
+                <br/>
                 <Button type='submit' variant='primary'>Register</Button>
             </Form>
             <Row className='py-3'>
