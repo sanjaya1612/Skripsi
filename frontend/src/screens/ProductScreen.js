@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, ListGroup, Button, Form, Nav } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button, Form} from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -11,6 +11,7 @@ import { listProductDetails } from '../actions/productActions'
 
 const ProductScreen = ({ history, match }) => {
     const [qty, setQty] = useState(1)
+    const [date,setDate] = useState("")
     const dispatch = useDispatch()
 
     const productDetails = useSelector(state => state.productDetails)
@@ -20,8 +21,12 @@ const ProductScreen = ({ history, match }) => {
         dispatch(listProductDetails(match.params.id))
     }, [dispatch, match])
 
-    const addToCartHandler = () => {
-        history.push(`/cart/${match.params.id}?qty=${qty}`)
+    const PaymentHandler = () => {
+        localStorage.setItem("Qty",qty)
+        localStorage.setItem("Date",date)
+        // history.push(`/shipping/${match.params.id}?qty=${qty}`)
+        history.push(`/login?redirect=booking/${match.params.id}`)
+        // history.push('/login?redirect=shipping')
     }
     return (
         <>
@@ -51,7 +56,7 @@ const ProductScreen = ({ history, match }) => {
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
                                 <Row>
-                                    <Col>Price:</Col>
+                                    <Col>Price : </Col>
                                     <Col>
                                         <strong>Rp.{product.price}</strong>
                                     </Col>
@@ -59,7 +64,7 @@ const ProductScreen = ({ history, match }) => {
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
-                                    <Col>Status:</Col>
+                                    <Col>Status : </Col>
                                     <Col>
                                         {product.countInStock > 0 ? 'in Stock' : 'Out of Stock'}
                                     </Col>
@@ -68,7 +73,7 @@ const ProductScreen = ({ history, match }) => {
                             {product.countInStock > 0 && (
                                 <ListGroup.Item>
                                     <Row>
-                                        <Col>Qty</Col>
+                                        <Col>Qty : </Col>
                                         <Col>
                                             <Form.Control as='select' value={qty} onChange={(e) => setQty(e.target.value)}>
                                                 {[...Array(product.countInStock).keys()].map(x => (
@@ -83,17 +88,18 @@ const ProductScreen = ({ history, match }) => {
                             )}
                             <ListGroup.Item>
                                 <Row>
-                                    <Col>Select date : <Button type='button' variant='light'><i className="far fa-calendar-alt"></i></Button></Col>
+                                    <Col>Select date : </Col>
+                                    <Col><input type="date" onChange={(e) => setDate(e.target.value)}></input></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup>
                                 <br></br>
                                 <Button
-                                    onClick={addToCartHandler}
+                                    onClick={PaymentHandler}
                                     className='btn-block'
                                     type='button'
-                                    disabled={product.countInStock === 0}
-                                > Add to Cart </Button>
+                                    disabled={product.countInStock === 0 && setDate == null}
+                                > Proceed to payment </Button>
                             </ListGroup>
                         </ListGroup>
                     </Col>
