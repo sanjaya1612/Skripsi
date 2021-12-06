@@ -29,7 +29,8 @@ const LoginScreen = ({ location, history }) => {
     }
 
     return (
-        <Container className="mt-5">
+        <Container className='mt-5'>
+        <>
                 <Row>
                     <Col lg={4} md={6} sm={12}>
                         <h1>Sign In</h1>
@@ -65,6 +66,7 @@ const LoginScreen = ({ location, history }) => {
                         <img className="w-75" src='/images/login.svg' alt="" />
                     </Col>
                 </Row>
+        </>
         </Container>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, ListGroup, Button, Form} from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button, Form, Container} from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -9,6 +9,7 @@ import { listProductDetails } from '../actions/productActions'
 
 
 const ProductScreen = ({ history, match }) => {
+    
     const [qty, setQty] = useState(1)
     const [date, setDate] = useState("")
     const dispatch = useDispatch()
@@ -22,11 +23,13 @@ const ProductScreen = ({ history, match }) => {
     }, [dispatch, match])
 
     const PaymentHandler = () => {
-        if (date ==+ "") {
+        if (date === "") {
             setMessage('Date must be filled')
         } else {
             localStorage.setItem("Qty", qty)
             localStorage.setItem("Date", date)
+            localStorage.setItem("PImage", product.image)
+            localStorage.setItem("PId",product._id)
             history.push(`/login?redirect=booking/${match.params.id}`)
         }
     }
