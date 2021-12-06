@@ -8,31 +8,34 @@ import Loader from '../components/Loader'
 import { listProductDetails } from '../actions/productActions'
 
 
-
 const ProductScreen = ({ history, match }) => {
     const [qty, setQty] = useState(1)
-    const [date,setDate] = useState("")
+    const [date, setDate] = useState("")
     const dispatch = useDispatch()
 
     const productDetails = useSelector(state => state.productDetails)
     const { loading, error, product } = productDetails
+    const [message, setMessage] = useState()
 
     useEffect(() => {
         dispatch(listProductDetails(match.params.id))
     }, [dispatch, match])
 
     const PaymentHandler = () => {
-        localStorage.setItem("Qty",qty)
-        localStorage.setItem("Date",date)
-        // history.push(`/shipping/${match.params.id}?qty=${qty}`)
-        history.push(`/login?redirect=booking/${match.params.id}`)
-        // history.push('/login?redirect=shipping')
+        if (date ==+ "") {
+            setMessage('Date must be filled')
+        } else {
+            localStorage.setItem("Qty", qty)
+            localStorage.setItem("Date", date)
+            history.push(`/login?redirect=booking/${match.params.id}`)
+        }
     }
     return (
         <>
             <Link className='btn btn-secondary my-3' to='/'><i className="fas fa-arrow-left"></i>
                 Go Back
             </Link>
+            {message && <Message variant='danger'>{message}</Message>}
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
                 <Row>
                     <Col md={6}>
@@ -98,14 +101,13 @@ const ProductScreen = ({ history, match }) => {
                                     onClick={PaymentHandler}
                                     className='btn-block'
                                     type='button'
-                                    disabled={product.countInStock === 0 && setDate == null}
+                                    disabled={product.countInStock === 0}
                                 > Proceed to payment </Button>
                             </ListGroup>
                         </ListGroup>
                     </Col>
                 </Row>
             )}
-
         </>
     )
 }

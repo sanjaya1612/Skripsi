@@ -38,12 +38,12 @@ const ActivityPlaceOrderScreen = () => {
                             {cart.paymentMethod}
                         </ListGroup.Item>
 
-                        {/* <ListGroup.Item>
-                            <h2>Order</h2>
-                            <Col md={1}>
+                        <ListGroup.Item>
+                            <h2>Order Details</h2>
+                            {/* <Col md={1}>
                                 <Image src={""} alt={""} fluid rounded />
-                            </Col>
-                        </ListGroup.Item> */}
+                            </Col> */}
+                        </ListGroup.Item>
                     </ListGroup>
                 </Col>
             </Row>
