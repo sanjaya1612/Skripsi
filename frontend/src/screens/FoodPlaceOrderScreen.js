@@ -29,9 +29,9 @@ const FoodPlaceOrderScreen = () => {
                             <>
                                 <strong>Addres: </strong>
                                 {cart.shippingAddress.address},
-                                {cart.shippingAddress.city}{' '},
-                                {cart.shippingAddress.province}{' '},
-                                {cart.shippingAddress.postalCode}
+                                {' '}{cart.shippingAddress.city},
+                                {' '}{cart.shippingAddress.province},
+                                {' '}{cart.shippingAddress.postalCode}
                             </>
                         </ListGroup.Item>
                         <ListGroup.Item>

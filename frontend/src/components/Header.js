@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
-import { Link } from 'react-router-dom'
 
 const Header = (history) => {
     const dispatch = useDispatch()
@@ -54,7 +53,6 @@ const Header = (history) => {
                             ) : <LinkContainer to='/login'>
                                 <Nav.Link><i className="fas fa-user"></i> Sign in</Nav.Link>
                             </LinkContainer>}
-
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

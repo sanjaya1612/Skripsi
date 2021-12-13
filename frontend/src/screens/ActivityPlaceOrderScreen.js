@@ -71,7 +71,7 @@ const ActivityPlaceOrderScreen = ({ history }) => {
     cart.itemPrice = Number(localStorage.Qty * product.price)
     cart.taxPrice = Number((0.10 * cart.itemPrice))
     cart.totalPrice = Number((localStorage.Qty * product.price) + cart.taxPrice)
-    
+
 
     return (
         <>
@@ -146,15 +146,21 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                                     <Col>Rp.{cart.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            <ListGroup.Item>
+                            {/* <ListGroup.Item>
                                 <Button
                                     type='button'
                                     className='w-100'
                                     onClick={activityPlaceOrderHandler}
                                 >Place Order</Button>
-                            </ListGroup.Item>
+                            </ListGroup.Item> */}
                         </ListGroup>
                     </Card>
+                    <br/>
+                    <Button
+                        type='button'
+                        className='w-100'
+                        onClick={activityPlaceOrderHandler}
+                    >Place Order</Button>
                 </Col>
             </Row>
         </>

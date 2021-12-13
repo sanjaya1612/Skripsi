@@ -54,7 +54,7 @@ const CartScreen = ({ match, location, history }) => {
                                                 as='Select'
                                                 value={item.qty}
                                                 onChange={(e) => dispatch(addToCart(item.food, Number(e.target.value)))}>
-                                                {/* <option value={qty}>{qty}</option> */}
+                                                {<option value={qty}>{qty}</option>}
                                                 {[...Array(item.countInStock).keys()].map((x) => (
                                                     <option key={x + 1} value={x + 1}>
                                                         {x + 1}
@@ -71,7 +71,7 @@ const CartScreen = ({ match, location, history }) => {
                         </ListGroup>
                     )}
             </Col>
-            <Col md={4}>
+            <Col md={3}>
                 <Card>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
@@ -79,10 +79,9 @@ const CartScreen = ({ match, location, history }) => {
                            <h2>Total Price</h2> Rp.{cartItems.reduce((acc, item) => acc + item.qty * item.price,0)}
                         </ListGroup.Item>
                     </ListGroup>
-                    <ListGroup.Item>
-                        <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>Proceed to Checkout</Button>
-                    </ListGroup.Item>
                 </Card>
+                <br/>
+                <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>Proceed to Checkout</Button>
             </Col>
         </Row>
     )
