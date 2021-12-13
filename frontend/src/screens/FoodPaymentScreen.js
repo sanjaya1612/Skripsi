@@ -3,13 +3,13 @@ import { Form, Button, Col} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import { savePaymentMethod } from '../actions/cartActions'
-import CheckOutSteps from '../components/CheckOutSteps'
+import FoodSteps from '../components/FoodSteps'
 
-const PaymentScreen = ({ history }) => {
+const FoodPaymentScreen = ({ history }) => {
     const cart = useSelector((state) => state.cart)
-    const { booking } = cart
-    if (!booking) {
-        history.push('/booking')
+    const { shippingAddress } = cart
+    if (!shippingAddress) {
+        history.push('/shipping')
     }
     const [paymentMethod, setPaymentMethod] = useState('BCA bank transfer')
 
@@ -18,11 +18,11 @@ const PaymentScreen = ({ history }) => {
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(savePaymentMethod(paymentMethod))
-        history.push('/activityplaceorder/'+localStorage.getItem("PId"))
+        history.push('/foodplaceorder')
     }
     return (
         <FormContainer>
-            <CheckOutSteps step1 step2 step3 />
+            <FoodSteps step1 step2 step3 />
             <h1>Payment Method</h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group>
@@ -39,6 +39,14 @@ const PaymentScreen = ({ history }) => {
                         checked
                         onChange={(e) => setPaymentMethod(e.target.value)}>
                     </Form.Check>
+                    <Form.Check
+                        type='radio'
+                        label='PayPal or Credit Card'
+                        id='PayPal'
+                        name='paymentMethod'
+                        value='PayPal'
+                        onChange={(e) => setPaymentMethod(e.target.value)}>
+                    </Form.Check>
                 </Col>
                 </Form.Group>
                 <br />
@@ -50,4 +58,4 @@ const PaymentScreen = ({ history }) => {
     )
 }
 
-export default PaymentScreen
+export default FoodPaymentScreen

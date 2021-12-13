@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { productListReducer, productDetailsReducer } from './reducers/productReducers'
+import { foodListReducer, foodDetailsReducer } from './reducers/foodReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
     userLoginReducer,
@@ -10,14 +11,20 @@ import {
     userUpdateProfileReducer
 } from './reducers/userReducers'
 
+import { orderCreatedReducer, orderDetailsReducer } from './reducers/orderReducers'
+
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
+    foodList: foodListReducer,
+    foodDetails: foodDetailsReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
+    orderCreate: orderCreatedReducer,
+    orderDetails: orderDetailsReducer
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
@@ -30,8 +37,16 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 const bookingFromStorage = localStorage.getItem('booking')
     ? JSON.parse(localStorage.getItem('booking'))
     : {}
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
+    ? JSON.parse(localStorage.getItem('shippingAddress'))
+    : {}
 const initialState = {
-    cart: { cartItems: cartItemsFromStorage, booking:bookingFromStorage },
+    cart: 
+    {
+        cartItems: cartItemsFromStorage,
+        booking: bookingFromStorage,
+        shippingAddress: shippingAddressFromStorage
+    },
     userLogin: { userInfo: userInfoFromStorage },
 }
 const middleware = [thunk]

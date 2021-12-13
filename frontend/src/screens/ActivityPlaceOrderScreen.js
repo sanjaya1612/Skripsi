@@ -1,26 +1,77 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Image, Card} from 'react-bootstrap'
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import CheckOutSteps from '../components/CheckOutSteps'
 import { listProductDetails } from '../actions/productActions'
+import { createOrder } from '../actions/orderActions'
 
-const ActivityPlaceOrderScreen = (match) => {
+const ActivityPlaceOrderScreen = ({ history }) => {
     const dispatch = useDispatch()
+    // const [orderItems, setItems] = useState("")
+    // const [paymentMethod, setPaymentMethod] = useState("")
+    // const [itemPrice, setPrice] = useState("")
+    // const [taxPrice, setTaxPrice] = useState("")
+    // const [totalPrice, setTotalPrice] = useState("")
+    // const [userId, setUserId] = useState("")
     const productDetails = useSelector(state => state.productDetails)
     const { product } = productDetails
     const cart = useSelector((state) => state.cart)
+
+    // const orderCreate = useSelector(state => state.orderCreate)
+    // const { order, success, error } = orderCreate
+
+    // useEffect(() => {
+    //     if (success) {
+    //         history.push(`/order/${order._id}`)
+    //     }
+    //     // eslint-disable-next-line
+    // }, [history, success])
+    const orderCreate = useSelector(state => state.orderCreate)
+    const { order, success } = orderCreate
+
+    // useEffect(() =>{
+    // if(success){
+    // history.push(`/order/${order._id}`)
+    // }
+    // //eslint-disable-next-line
+    // },[history, success])
     const activityPlaceOrderHandler = () => {
-        console.log('order')
+        dispatch(createOrder({
+            orderItems: product.name,
+            paymentMethod: cart.paymentMethod,
+            itemPrice: cart.itemPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice,
+            userId: localStorage.getItem("userId")
+        }))
+        // setItems(product.name)
+        // setPaymentMethod(cart.paymentMethod)
+        // setPrice(cart.itemPrice)
+        // setTaxPrice(cart.taxPrice)
+        // setTotalPrice(cart.totalPrice)
+        // setUserId(localStorage.getItem("userId"))
+        // console.log(product.name)
+        // history.push(`/order/${order._id}`)
+        // dispatch(createOrder(product.name,cart.paymentMethod,cart.itemPrice,cart.taxPrice,cart.totalPrice,localStorage.getItem("userId")))
+        // console.log("Data masuk")
+        // console.log(product.name)
+        // console.log(cart.paymentMethod)
+        // console.log(cart.itemPrice)
+        // console.log(cart.taxPrice)
+        // console.log(cart.totalPrice)
+        // console.log(localStorage.getItem("userId"))
+
     }
     useEffect(() => {
         dispatch(listProductDetails(localStorage.getItem("PId")))
-    }, [dispatch, match])   
+    }, [dispatch])
 
     //calculation
     cart.itemPrice = Number(localStorage.Qty * product.price)
     cart.taxPrice = Number((0.10 * cart.itemPrice))
     cart.totalPrice = Number((localStorage.Qty * product.price) + cart.taxPrice)
+    
 
     return (
         <>
@@ -61,9 +112,8 @@ const ActivityPlaceOrderScreen = (match) => {
                                     <Image src={product.image} alt={""} width={100} rounded />
                                 </Col>
                                 <Col>
-                                    <Link to={`/product/${product.product}`}>
-                                        {product.name}
-                                    </Link>
+                                    {product.name}
+
                                 </Col>
                                 <Col md={5}>
                                     {localStorage.Qty} x Rp.{product.price} = Rp.{localStorage.Qty * product.price}
@@ -97,7 +147,11 @@ const ActivityPlaceOrderScreen = (match) => {
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                <Button type='button' className='w-100' onClick={activityPlaceOrderHandler}>Place Order</Button>
+                                <Button
+                                    type='button'
+                                    className='w-100'
+                                    onClick={activityPlaceOrderHandler}
+                                >Place Order</Button>
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>

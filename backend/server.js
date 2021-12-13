@@ -1,9 +1,12 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import {notFound, errorHandler} from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
+
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
-import {notFound, errorHandler} from './middleware/errorMiddleware.js'
+import orderRoutes from './routes/orderRoutes.js'
+import foodRoutes from './routes/foodRoutes.js'
 
 dotenv.config()
 
@@ -17,7 +20,9 @@ app.get('/', (req,res) => {
 })
 
 app.use('/api/products', productRoutes)
+app.use('/api/foods', foodRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/order', orderRoutes)
 
 app.use(notFound)
 

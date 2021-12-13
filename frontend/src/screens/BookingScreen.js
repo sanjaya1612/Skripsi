@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Form, Button, Container} from 'react-bootstrap'
+import { Form, Button} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import CheckOutSteps from '../components/CheckOutSteps'
 import { saveBooking } from '../actions/cartActions'
 
-const ShippingScreen = ({history}) => {
+const BookingScreen = ({history}) => {
     const cart = useSelector((state) => state.cart)
     const { booking } = cart
 
@@ -63,4 +63,4 @@ const ShippingScreen = ({history}) => {
     )
 }
 
-export default ShippingScreen
+export default BookingScreen

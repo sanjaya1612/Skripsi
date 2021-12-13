@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card, ListGroupItem } from 'react-bootstrap'
@@ -7,17 +7,23 @@ import { addToCart, removeFromCart } from '../actions/cartActions'
 
 
 const CartScreen = ({ match, location, history }) => {
-    const productId = match.params.id
-    const qty = location.search ? Number(location.search.split('=')[1]) : 1
+    const foodId = match.params.id
+    const [qty, setQty] = useState(1)
+    var total  
+    //var qtyy = qty
+    //const qty = location.search ? Number(location.search.split('=')[1]) : 1
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
     useEffect(() => {
-        if (productId) {
-            dispatch(addToCart(productId, qty))
+        if (foodId) {
+            var url1 = window.location.pathname;
+            var idurl = url1.substring(url1.lastIndexOf('/') + 1);
+            setQty(idurl)
+            dispatch(addToCart(foodId, qty))
         }
-    }, [dispatch, productId, qty])
+    }, [dispatch, foodId, qty])
 
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id))
@@ -30,25 +36,26 @@ const CartScreen = ({ match, location, history }) => {
         <Row>
             <Col md={8}>
                 <h1>Shopping Cart</h1>
-                {cartItems.length === 0 ? <Message>Your cart is empty <Link to='/'>Go Back</Link></Message> :
+                {cartItems.length === 0 ? <Message>Your cart is empty <Link to='/foods'>Go Back</Link></Message> :
                     (
                         <ListGroup variant='flush'>
                             {cartItems.map(item => (
-                                <ListGroupItem key={item.product}>
+                                <ListGroupItem key={item.food}>
                                     <Row>
                                         <Col md={2}>
-                                            <Image src={item.image} alt={item.name} fluid rounded />
+                                            <Image src={item.image} alt={item.name} width={75} rounded />
                                         </Col>
                                         <Col md={3}>
-                                            <Link to={`/product/${item.product}`}>{item.name}</Link>
+                                            <Link to={`/food/${item.food}`}>{item.name}</Link>
                                         </Col>
                                         <Col md={2}>Rp.{item.price}</Col>
                                         <Col md={2}>
                                             <Form.Control
                                                 as='Select'
                                                 value={item.qty}
-                                                onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}>
-                                                {[...Array(item.countInStock).keys()].map(x => (
+                                                onChange={(e) => dispatch(addToCart(item.food, Number(e.target.value)))}>
+                                                {/* <option value={qty}>{qty}</option> */}
+                                                {[...Array(item.countInStock).keys()].map((x) => (
                                                     <option key={x + 1} value={x + 1}>
                                                         {x + 1}
                                                     </option>
@@ -56,7 +63,7 @@ const CartScreen = ({ match, location, history }) => {
                                             </Form.Control>
                                         </Col>
                                         <Col md={2}>
-                                            <Button type='button' variant='light' onClick={() => removeFromCartHandler(item.product)}><i className='fas fa-trash'></i></Button>
+                                            <Button type='button' variant='light' onClick={() => removeFromCartHandler(item.food)}><i className='fas fa-trash'></i></Button>
                                         </Col>
                                     </Row>
                                 </ListGroupItem>
@@ -68,8 +75,8 @@ const CartScreen = ({ match, location, history }) => {
                 <Card>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
-                            Rp.{cartItems.reduce((acc, item) => acc + item.qty * item.price, 0)}
+                            {/* <h2>Subtotal ({cartItems.reduce((acc , item)=> acc + item.qty,total = item.qty + 0)}) items</h2> */}
+                           <h2>Total Price</h2> Rp.{cartItems.reduce((acc, item) => acc + item.qty * item.price,0)}
                         </ListGroup.Item>
                     </ListGroup>
                     <ListGroup.Item>
