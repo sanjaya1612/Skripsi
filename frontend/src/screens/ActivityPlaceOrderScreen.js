@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import CheckOutSteps from '../components/CheckOutSteps'
@@ -30,12 +29,13 @@ const ActivityPlaceOrderScreen = ({ history }) => {
     const orderCreate = useSelector(state => state.orderCreate)
     const { order, success } = orderCreate
 
-    // useEffect(() =>{
-    // if(success){
-    // history.push(`/order/${order._id}`)
-    // }
-    // //eslint-disable-next-line
-    // },[history, success])
+    useEffect(() => {
+        if (success) {
+            history.push(`/order/${order._id}`)
+            console.log(order._id)
+        }
+        //eslint-disable-next-line
+    }, [history, success])
     const activityPlaceOrderHandler = () => {
         dispatch(createOrder({
             orderItems: product.name,
@@ -155,7 +155,7 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                             </ListGroup.Item> */}
                         </ListGroup>
                     </Card>
-                    <br/>
+                    <br />
                     <Button
                         type='button'
                         className='w-100'

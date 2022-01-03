@@ -1,69 +1,59 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import FoodSteps from '../components/FoodSteps'
+import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { createFoodOrder } from '../actions/oderFoodActions'
+import { getOrderDetails } from '../actions/orderActions'
 
 
-const FoodPlaceOrderScreen = ({ history }) => {
+const OrderScreen = ({ match }) => {
+    const orderId = match.params.id
     const dispatch = useDispatch()
-    const cart = useSelector((state) => state.cart)
 
-    //calculation
 
-    cart.itemsPrice = Number(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
-    cart.shippingPrice = Number(cart.itemsPrice > 500000 ? 0 : 10000)
-    cart.taxPrice = Number((0.1 * cart.itemsPrice))
-    cart.totalPrice = Number(cart.itemsPrice + cart.shippingPrice + cart.taxPrice)
-
-    const orderFoodCreate = useSelector((state) => state.orderFoodCreate)
-    const {order, success} = orderFoodCreate
+    const OrderDetails = useSelector(state => state.OrderDetails)
+    const { order, loading, error } = OrderDetails
 
     useEffect(() => {
-         if (success){
-             console.log('Pindah')
-             history.push(`/foodorder/${order._id}`)
-         }
-    }, [history, success])
-    const foodPlaceOrderHandler = () => {
-        dispatch(createFoodOrder({
-            orderItems: cart.cartItems,
-            shippingAddress: cart.shippingAddress,
-            paymentMethod: cart.paymentMethod,
-            itemsPrice: cart.itemsPrice,
-            shippingPrice: cart.shippingPrice,
-            taxPrice: cart.taxPrice,
-            totalPrice: cart.totalPrice,
-        }))
-    }
+        dispatch(getOrderDetails(orderId))
+    }, [])
 
-    return (
-        <>
-            <FoodSteps step1 step2 step3 step4 />
+
+    return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
+        : <>
+            <h1>Order {order._id}</h1>
             <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>
-                        <ListGroup.Item>
-                            <h2>Shipping</h2>
-                            <>
-                                <strong>Addres: </strong>
-                                {cart.shippingAddress.address},
-                                {' '}{cart.shippingAddress.city},
-                                {' '}{cart.shippingAddress.province},
-                                {' '}{cart.shippingAddress.postalCode}
-                            </>
+                    <ListGroup.Item>
+                            <h2>Booking</h2>
+                            <p>
+                                <strong>Name: </strong>
+                                {order.booking.fullName}
+                            </p>
+                            <p>
+                                <strong>E-mail: </strong>
+                                {order.booking.email}
+                            </p>
+                            <p>
+                                <strong>Phone number: </strong>
+                                {order.booking.phoneNumber}
+                            </p>
+                            <p>
+                                <strong>Date: </strong>
+                                {localStorage.getItem("Date")}
+                            </p>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Payment Method</h2>
                             <strong>Method: </strong>
-                            {cart.paymentMethod}
+                            {order.paymentMethod}
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Order Items</h2>
-                            {cart.cartItems.length === 0 ? <Message>Your cart is empty</Message> : (
+                            {order.orderItems.length === 0 ? <Message>No Order</Message> : (
                                 <ListGroup variant='flush'>
-                                    {cart.cartItems.map((item, index) => (
+                                    {order.orderItems.map((item, index) => (
                                         <ListGroup.Item key={index}>
                                             <Row>
                                                 <Col md={1}>
@@ -92,39 +82,33 @@ const FoodPlaceOrderScreen = ({ history }) => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Items</Col>
-                                    <Col>Rp.{cart.itemsPrice}</Col>
+                                    <Col>Rp.{order.itemsPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            <ListGroup.Item>
+                            {/* <ListGroup.Item>
                                 <Row>
                                     <Col>Shipping</Col>
-                                    <Col>Rp.{cart.shippingPrice}</Col>
+                                    <Col>Rp.{order.shippingPrice}</Col>
                                 </Row>
-                            </ListGroup.Item>
+                            </ListGroup.Item> */}
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col>Rp.{cart.taxPrice}</Col>
+                                    <Col>Rp.{order.taxPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total Price</Col>
-                                    <Col>Rp.{cart.totalPrice}</Col>
+                                    <Col>Rp.{order.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>
-                    <br />
-                    <Button
-                        type='button'
-                        className='w-100'
-                        onClick={foodPlaceOrderHandler}
-                    >Place Order</Button>
+
                 </Col>
             </Row>
         </>
-    )
 }
 
-export default FoodPlaceOrderScreen
+export default OrderScreen

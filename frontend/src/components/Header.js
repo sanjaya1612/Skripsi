@@ -46,13 +46,26 @@ const Header = (history) => {
                                     <LinkContainer to='/profile'>
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
                                     </LinkContainer>
-                                    <LinkContainer to ='/'>
-                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                                    <LinkContainer to='/'>
+                                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                                     </LinkContainer>
                                 </NavDropdown>
                             ) : <LinkContainer to='/login'>
                                 <Nav.Link><i className="fas fa-user"></i> Sign in</Nav.Link>
                             </LinkContainer>}
+                            {userInfo && userInfo.isAdmin && (
+                                <NavDropdown title='Admin' id='adminmenu'>
+                                    <LinkContainer to='/admin/userlist'>
+                                        <NavDropdown.Item>Users</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='admin/activitylist'>
+                                        <NavDropdown.Item>Activities</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='admin/activityorderlist'>
+                                        <NavDropdown.Item>Activity Orders</NavDropdown.Item>
+                                    </LinkContainer>
+                                </NavDropdown>
+                            )}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

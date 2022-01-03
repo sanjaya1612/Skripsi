@@ -24,7 +24,15 @@ const orderSchema = mongoose.Schema({
     userId:{
         type: String,
         required :true
-    }
+    },
+    isPaid: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    paidAt: {
+        type: Date,
+    },
 },{
     timestamps: true
 })
