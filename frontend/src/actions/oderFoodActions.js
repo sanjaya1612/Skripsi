@@ -24,7 +24,7 @@ export const createFoodOrder = (order) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.post(
-            `/api/foods`, order, config
+            `/api/orderfoods`, order, config
         )
 
         dispatch({
@@ -52,12 +52,12 @@ export const getOrderFoodDetails = (id) => async (dispatch, getState) => {
 
         const config = {
             headers: {
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${userInfo.token}`,
             }
         }
 
         const { data } = await axios.get(
-            `/api/foods/${id}`,config
+            `/api/orderfoods/${id}`, config
         )
 
         dispatch({

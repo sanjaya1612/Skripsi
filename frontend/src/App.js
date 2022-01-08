@@ -22,6 +22,7 @@ import OrderScreen from "./screens/OrderScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import ActivityListScreen from "./screens/ActivityListScreen";
+import ActivityEditScreen from "./screens/ActivityEditScreen";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/foodpayment' component={FoodPaymentScreen} />
           <Route path='/booking' component={BookingScreen} />
-          <Route path='/foodorder/:id' component={FoodOrderScreen} />
+          <Route path='/foodorders/:id' component={FoodOrderScreen} />
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/activityplaceorder' component={ActivityPlaceOrderScreen} />
@@ -47,6 +48,7 @@ function App() {
           <Route path='/admin/userlist' component={UserListScreen} />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />
           <Route path='/admin/activitylist' component={ActivityListScreen} />
+          <Route path='/admin/activity/:id/edit' component={ActivityEditScreen} />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>

@@ -35,12 +35,12 @@ const addFoodItems = asyncHandler(async (req, res) => {
 })
 
 const getFoodById = asyncHandler(async (req, res) => {
-    const orderFood = await OrderFood.findById(req.params.id).populate('user', 'name email')
-    if(orderFood){
+    const order = await OrderFood.findById(req.params.id).populate('user', 'name email')
+    if(order){
         res.json(order)
     } else {
         res.status(404)
-        throw new Error('Order not found')
+        throw new Error('Food not found')
     }
 })
 

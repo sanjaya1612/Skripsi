@@ -22,9 +22,9 @@ const FoodPlaceOrderScreen = ({ history }) => {
 
     useEffect(() => {
          if (success){
-             console.log('Pindah')
-             history.push(`/foodorder/${order._id}`)
+             history.push(`/foodorders/${order._id}`)
          }
+         // eslint-disable-next-line
     }, [history, success])
     const foodPlaceOrderHandler = () => {
         dispatch(createFoodOrder({

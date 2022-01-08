@@ -8,21 +8,21 @@ import { getOrderFoodDetails } from '../actions/oderFoodActions'
 
 const FoodOrderScreen = ({ match }) => {
     const orderId = match.params.id
-    const dispatch = useDispatch()
+    const dispatch = useDispatch() 
 
 
-    const OrderDetails = useSelector(state => state.OrderDetails)
-    const { order, loading, error } = OrderDetails
+    const OrderFoodDetails= useSelector((state) => state.OrderFoodDetails)
+    const { order, loading, error } = OrderFoodDetails
 
     useEffect(() => {
         dispatch(getOrderFoodDetails(orderId))
     }, [])
 
 
-    return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
-        : <>
+     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
+         : <>
             <h1>Order {order._id}</h1>
-            <Row>
+            {/* <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
@@ -98,7 +98,7 @@ const FoodOrderScreen = ({ match }) => {
                     </Card>
 
                 </Col>
-            </Row>
+            </Row> */}
         </>
 }
 

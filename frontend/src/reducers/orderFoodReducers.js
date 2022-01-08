@@ -38,7 +38,7 @@ export const orderFoodDetailsReducer = (
                 ...state,
                 laodiing: true
             }
-        case ORDER_FOOD_DETAILS_SUCCESS:
+        case ORDER_FOOD_DETAILS_SUCCESS:    
             return {
                 laodiing: false,
                 order: action.payload
