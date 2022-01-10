@@ -10,6 +10,7 @@ npm i -D nodemon concurrently
 npm i mongoose@5.13.7
 npm i express-async-handler
 npm i jsonwebtoken
+npm i multer
 
 npm run dev to start frontend and backend
-npm run server tp start backend only
+npm run server to start backend only

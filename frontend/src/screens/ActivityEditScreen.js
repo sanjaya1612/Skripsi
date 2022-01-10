@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
@@ -5,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { listProductDetails } from '../actions/productActions'
+import { listProductDetails, updateProduct } from '../actions/productActions'
+import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 
 
 const ActivityEditScreen = ({ match, history }) => {
@@ -19,117 +21,167 @@ const ActivityEditScreen = ({ match, history }) => {
     const [destination, setDestination] = useState('')
     const [city, setCity] = useState('')
     const [description, setDescription] = useState('')
+    const [uploading, setUploading] = useState(false)
 
     const dispatch = useDispatch()
 
     const productDetails = useSelector((state) => state.productDetails)
     const { loading, error, product } = productDetails
 
+    const productUpdate = useSelector((state) => state.productUpdate)
+    const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdate
+
     useEffect(() => {
-        if (!product.name || product._id !== productId) {
-            dispatch(listProductDetails(productId))
+        if (successUpdate) {
+            dispatch({ type: PRODUCT_UPDATE_RESET })
+            history.push('/admin/activitylist')
         } else {
-            setName(product.name)
-            setPrice(product.price)
-            setImage(product.image)
-            setCategory(product.category)
-            setCountInStock(product.countInStock)
-            setDestination(product.destination)
-            setCity(product.city)
-            setDescription(product.description)
+            if (!product.name || product._id !== productId) {
+                dispatch(listProductDetails(productId))
+            } else {
+                setName(product.name)
+                setPrice(product.price)
+                setImage(product.image)
+                setCategory(product.category)
+                setCountInStock(product.countInStock)
+                setDestination(product.destination)
+                setCity(product.city)
+                setDescription(product.description)
+            }
         }
-    }, [dispatch, history, productId, product])
-const submitHandler = (e) => {
-    e.preventDefault()
-    //update product
-}
+    }, [dispatch, history, productId, product, successUpdate])
 
-return (
-    <>
-        <Link to='/admin/activitylist' className='btn btn-primary my-3'>Go Back</Link>
-        <FormContainer>
-            <h1>Edit Activities</h1>
-            {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-                <Form onSubmit={submitHandler}>
-                    <Form.Group controlId='name'>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            type='name'
-                            placeholder='Enter Your Name'
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}></Form.Control>
-                    </Form.Group>
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0]
+        const formData = new FormData()
+        formData.append('image', file)
+        setUploading(true)
 
-                    <Form.Group controlId='price'>
-                        <Form.Label>Price</Form.Label>
-                        <Form.Control
-                            type='number'
-                            placeholder='Enter price'
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}></Form.Control>
-                    </Form.Group>
+        try{
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+            const{data} = await axios.post('/api/upload', formData, config)
 
-                    <Form.Group controlId='image'>
-                    <Form.Label>Image</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder='Enter image url'
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)}></Form.Control>
-                    </Form.Group>
+            setImage(data)
+            setUploading(false)
+        }catch (error){
+            console.log(error)
+            setUploading(false)
+        }
+    }
 
-                    <Form.Group controlId='category'>
-                    <Form.Label>Category</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder='Enter category'
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}></Form.Control>
-                    </Form.Group>
+    const submitHandler = (e) => {
+        e.preventDefault()
+        dispatch(updateProduct({
+            _id: productId,
+            name,
+            price,
+            image,
+            category,
+            destination,
+            city,
+            description,
+            countInStock
 
-                    <Form.Group controlId='countInStock'>
-                    <Form.Label>Count in stock</Form.Label>
-                        <Form.Control
-                            type='number'
-                            placeholder='Enter qty'
-                            value={countInStock}
-                            onChange={(e) => setCountInStock(e.target.value)}></Form.Control>
-                    </Form.Group>
+        }))
+    }
 
-                    <Form.Group controlId='destination'>
-                    <Form.Label>Destination</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder='Enter destination'
-                            value={destination}
-                            onChange={(e) => setDestination(e.target.value)}></Form.Control>
-                    </Form.Group>
+    return (
+        <>
+            <Link to='/admin/activitylist' className='btn btn-primary my-3'>Go Back</Link>
+            <FormContainer>
+                <h1>Edit Activities</h1>
+                {loadingUpdate && <Loader />}
+                {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+                {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
+                    <Form onSubmit={submitHandler}>
+                        <Form.Group controlId='name'>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type='name'
+                                placeholder='Enter Your Name'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}></Form.Control>
+                        </Form.Group>
 
-                    <Form.Group controlId='city'>
-                    <Form.Label>City</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder='Enter city'
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}></Form.Control>
-                    </Form.Group>
+                        <Form.Group controlId='price'>
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control
+                                type='number'
+                                placeholder='Enter price'
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}></Form.Control>
+                        </Form.Group>
 
-                    <Form.Group controlId='desctiption'>
-                    <Form.Label>Description</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder='Enter description'
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}></Form.Control>
-                    </Form.Group>
-                    <br />
-                    <Button type='submit' variant='primary'>Update</Button>
-                </Form>
-            )}
+                        <Form.Group controlId='image'>
+                            <Form.Label>Image</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter image url'
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}></Form.Control>
+                            <Form.File
+                                id='image-file'
+                                custom onChange={uploadFileHandler}>
+                            </Form.File>
+                            {uploading && <Loader />}
+                        </Form.Group>
 
-        </FormContainer>
-    </>
-)
+                        <Form.Group controlId='category'>
+                            <Form.Label>Category</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter category'
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId='countInStock'>
+                            <Form.Label>Count in stock</Form.Label>
+                            <Form.Control
+                                type='number'
+                                placeholder='Enter qty'
+                                value={countInStock}
+                                onChange={(e) => setCountInStock(e.target.value)}></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId='destination'>
+                            <Form.Label>Destination</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter destination'
+                                value={destination}
+                                onChange={(e) => setDestination(e.target.value)}></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId='city'>
+                            <Form.Label>City</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter city'
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId='desctiption'>
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter description'
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <br />
+                        <Button type='submit' variant='primary'>Update</Button>
+                    </Form>
+                )}
+
+            </FormContainer>
+        </>
+    )
 }
 
 export default ActivityEditScreen

@@ -35,7 +35,7 @@ const ActivityListScreen = ({history, match}) => {
         }
 
         if(successCreate) {
-            history.push(`product/${createdProduct._id}/edit`)
+            history.push(`activity/${createdProduct._id}/edit`)
         }else{
             dispatch(listProducts())
         }
