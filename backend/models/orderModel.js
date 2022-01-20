@@ -1,9 +1,21 @@
 import mongoose from 'mongoose'
 
 const orderSchema = mongoose.Schema({
-    orderItems:{
-        type: String,
-        required: true
+    orderItems: [
+        {
+            name: { type: String, required: true },
+            qty: { type: Number, required: true },
+            price: { type: Number, required: true },
+            order: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'Product'
+            },
+            image: { type: String, required: true },
+        }
+    ],
+    date:{
+        type:Date,
     },
     paymentMethod:{
         type: String,

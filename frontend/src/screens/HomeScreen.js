@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Container, Image } from 'react-bootstrap'
+import { Row, Col, Container, Image, Carousel } from 'react-bootstrap'
 import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -18,7 +18,46 @@ const HomeScreen = () => {
 
     return (
         <>
-            <Container>
+            <Container> <Carousel>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100 rounded"
+                        style={{ height: 400 }}
+                        src="/images/1.jpg?text=First slide&bg=373940"
+                        alt="First slide"
+                    />
+                    <Carousel.Caption>
+                        <h3>First slide label</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100 rounded"
+                        style={{ height: 400 }}
+                        src="/images/2.jpg?text=Second slide&bg=282c34"
+                        alt="Second slide"
+                    />
+
+                    <Carousel.Caption>
+                        <h3>Second slide label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100 rounded"
+                        style={{ height: 400 }}
+                        src="/images/3.jpg?text=Third slide&bg=20232a"
+                        alt="Third slide"
+                    />
+
+                    <Carousel.Caption>
+                        <h3>Third slide label</h3>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
                 <h1>What We Serve</h1>
                 <h2>Top Values For You...</h2>
                 <br />

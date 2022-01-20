@@ -11,8 +11,8 @@ const OrderScreen = ({ match }) => {
     const dispatch = useDispatch()
 
 
-    const OrderDetails = useSelector(state => state.OrderDetails)
-    const { order, loading, error } = OrderDetails
+    const orderDetails = useSelector(state => state.orderDetails)
+    const { order, loading, error } = orderDetails
 
     useEffect(() => {
         dispatch(getOrderDetails(orderId))
@@ -27,18 +27,11 @@ const OrderScreen = ({ match }) => {
                     <ListGroup variant='flush'>
                     <ListGroup.Item>
                             <h2>Booking</h2>
-                            <p>
-                                <strong>Name: </strong>
-                                {order.booking.fullName}
-                            </p>
-                            <p>
-                                <strong>E-mail: </strong>
-                                {order.booking.email}
-                            </p>
-                            <p>
+                            {/* <strong>Name:</strong> {order.user.name} */}
+                            {/* <p>
                                 <strong>Phone number: </strong>
                                 {order.booking.phoneNumber}
-                            </p>
+                            </p> */}
                             <p>
                                 <strong>Date: </strong>
                                 {localStorage.getItem("Date")}
@@ -85,12 +78,6 @@ const OrderScreen = ({ match }) => {
                                     <Col>Rp.{order.itemsPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            {/* <ListGroup.Item>
-                                <Row>
-                                    <Col>Shipping</Col>
-                                    <Col>Rp.{order.shippingPrice}</Col>
-                                </Row>
-                            </ListGroup.Item> */}
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>

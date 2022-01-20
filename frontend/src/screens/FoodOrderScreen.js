@@ -1,44 +1,100 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
+import axios from 'axios'
+import { PayPalButton } from 'react-paypal-button-v2'
+import { Button, Row, Col, ListGroup, Image, Card, ListGroupItem } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { getOrderFoodDetails } from '../actions/oderFoodActions'
+import { getOrderFoodDetails, payFoodOrder, deliverFoodOrder } from '../actions/oderFoodActions'
+import { ORDER_FOOD_PAY_RESET, ORDER_FOOD_DELIVER_RESET } from '../constants/foodOrderConstants'
 
 
-const FoodOrderScreen = ({ match }) => {
+const FoodOrderScreen = ({ match, history }) => {
     const orderId = match.params.id
-    const dispatch = useDispatch() 
+
+    const [sdkReady, setSdkReady] = useState(false)
+
+    const dispatch = useDispatch()
 
 
-    const OrderFoodDetails= useSelector((state) => state.OrderFoodDetails)
-    const { order, loading, error } = OrderFoodDetails
+    const orderFoodDetails = useSelector(state => state.orderFoodDetails)
+    const { order, loading, error } = orderFoodDetails
+
+    const orderFoodPay = useSelector(state => state.orderFoodPay)
+    const { loading: loadingPay, success: successPay } = orderFoodPay
+
+    const orderFoodDeliver = useSelector(state => state.orderFoodDeliver)
+    const { loading: loadingDeliver, success: successDeliver } = orderFoodDeliver
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    if (!loading) {
+        order.itemsPrice = Number(order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0))
+    }
 
     useEffect(() => {
-        dispatch(getOrderFoodDetails(orderId))
-    }, [])
+        if(!userInfo){
+            history.push('/login')
+        }
+        const addPayPalScript = async () => {
+            const { data: clientId } = await axios.get('/api/config/paypal')
+            const script = document.createElement('script')
+            script.type = 'text/javascript'
+            script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
+            script.async = true
+            script.onload = () => {
+                setSdkReady(true)
+            }
+            document.body.appendChild(script)
+        }
+        if (!order || successPay || successDeliver) {
+            dispatch({ type: ORDER_FOOD_PAY_RESET })
+            dispatch({ type: ORDER_FOOD_DELIVER_RESET })
+            dispatch(getOrderFoodDetails(orderId))
+        } else if(!order.isPaid) {
+            if(!window.paypal) {
+                addPayPalScript()
+            } else {
+                setSdkReady(true)
+            }
+        }
+    }, [dispatch, orderId, successPay, successDeliver, order])
+
+    const successPaymentHandler = (paymentResult) => {
+        console.log(paymentResult)
+        dispatch(payFoodOrder(orderId, paymentResult))
+    }
+
+    const deliverHandler = () => {
+        dispatch(deliverFoodOrder(order))
+    }
 
 
-     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
-         : <>
+    return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
+        <>
             <h1>Order {order._id}</h1>
-            {/* <Row>
+            <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2>Shipping</h2>
+                            <h2>Shipping to : </h2>
                             <>
+                                <strong>Name:</strong> {order.user.name}
+                                <br />
                                 <strong>Addres: </strong>
-                                {order.address},
+                                {order.shippingAddress.address},
                                 {' '}{order.shippingAddress.city},
                                 {' '}{order.shippingAddress.province},
                                 {' '}{order.shippingAddress.postalCode}
                             </>
+                            {order.isDelivered ? <Message variant='success'>Delivered on {order.deliveredAt}</Message> : <Message variant='danger'>Not deliverd</Message>}
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Payment Method</h2>
                             <strong>Method: </strong>
                             {order.paymentMethod}
+                            {order.isPaid ? <Message variant='success'>Paid on {order.paidAt}</Message> : <Message variant='danger'>Not paid</Message>}
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Order Items</h2>
@@ -94,11 +150,29 @@ const FoodOrderScreen = ({ match }) => {
                                     <Col>Rp.{order.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
+                            {!order.isPaid && (
+                                <ListGroup.Item>
+                                    {loadingPay && <Loader />}
+                                    {!sdkReady ? <Loader /> : (
+                                        <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler}/>
+                                    )}
+                                </ListGroup.Item>
+                            )}
+                            {loadingDeliver && <Loader />}
+                            {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                                <ListGroup.Item>
+                                    <Button 
+                                    type='button' 
+                                    className='w-100' 
+                                    onClick={deliverHandler}>
+                                        Mark As Deliver
+                                    </Button>
+                                </ListGroup.Item>
+                            )}
                         </ListGroup>
                     </Card>
-
                 </Col>
-            </Row> */}
+            </Row>
         </>
 }
 

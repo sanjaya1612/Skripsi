@@ -32,35 +32,18 @@ const ActivityPlaceOrderScreen = ({ history }) => {
     useEffect(() => {
         if (success) {
             history.push(`/order/${order._id}`)
-            console.log(order._id)
         }
         //eslint-disable-next-line
     }, [history, success])
     const activityPlaceOrderHandler = () => {
         dispatch(createOrder({
             orderItems: product.name,
+            date: localStorage.getItem("Date"),
             paymentMethod: cart.paymentMethod,
             itemPrice: cart.itemPrice,
             taxPrice: cart.taxPrice,
             totalPrice: cart.totalPrice,
-            userId: localStorage.getItem("userId")
         }))
-        // setItems(product.name)
-        // setPaymentMethod(cart.paymentMethod)
-        // setPrice(cart.itemPrice)
-        // setTaxPrice(cart.taxPrice)
-        // setTotalPrice(cart.totalPrice)
-        // setUserId(localStorage.getItem("userId"))
-        // console.log(product.name)
-        // history.push(`/order/${order._id}`)
-        // dispatch(createOrder(product.name,cart.paymentMethod,cart.itemPrice,cart.taxPrice,cart.totalPrice,localStorage.getItem("userId")))
-        // console.log("Data masuk")
-        // console.log(product.name)
-        // console.log(cart.paymentMethod)
-        // console.log(cart.itemPrice)
-        // console.log(cart.taxPrice)
-        // console.log(cart.totalPrice)
-        // console.log(localStorage.getItem("userId"))
 
     }
     useEffect(() => {

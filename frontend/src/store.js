@@ -6,9 +6,17 @@ import {
     productDetailsReducer,
     productDeleteReducer,
     productCreateReducer,
-    productUpdateReducer, 
+    productUpdateReducer,
+    productCreateReviewReducer
 } from './reducers/productReducers'
-import { foodListReducer, foodDetailsReducer } from './reducers/foodReducers'
+import { 
+    foodListReducer, 
+    foodDetailsReducer,
+    foodDeleteReducer,
+    foodCreateReducer,
+    foodUpdateReducer,
+    foodReviewCreateReducer,
+} from './reducers/foodReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
     userLoginReducer,
@@ -20,7 +28,14 @@ import {
     userUpdateReducer
 } from './reducers/userReducers'
 
-import { orderFoodCreateReducer, orderFoodDetailsReducer} from './reducers/orderFoodReducers'
+import { 
+    orderFoodCreateReducer, 
+    orderFoodDetailsReducer,
+    orderFoodPayReducer,
+    orderFoodDeliverReducer,
+    orderListMyFoodReducer,
+    orderListFoodReducer
+} from './reducers/orderFoodReducers'
 
 import { orderCreatedReducer, orderDetailsReducer } from './reducers/orderReducers'
 
@@ -30,8 +45,13 @@ const reducer = combineReducers({
     productDelete: productDeleteReducer,
     productCreate: productCreateReducer,
     productUpdate: productUpdateReducer,
+    productCreateReview: productCreateReviewReducer,
     foodList: foodListReducer,
     foodDetails: foodDetailsReducer,
+    foodDelete: foodDeleteReducer,
+    foodCreate: foodCreateReducer,
+    foodUpdate: foodUpdateReducer,
+    foodReviewCreate: foodReviewCreateReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
@@ -44,6 +64,11 @@ const reducer = combineReducers({
     orderCreate: orderCreatedReducer,
     orderDetails: orderDetailsReducer,
     orderFoodDetails: orderFoodDetailsReducer,
+    orderFoodPay: orderFoodPayReducer,
+    orderFoodDeliver: orderFoodDeliverReducer,
+    orderListMyFood: orderListMyFoodReducer,
+    orderListFood: orderListFoodReducer,
+
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

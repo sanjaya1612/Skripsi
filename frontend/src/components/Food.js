@@ -14,9 +14,9 @@ const Food = ({ food }) => {
                     <Card.Title as='div'><strong>{food.name}</strong></Card.Title>
                 </Link>
                 <Card.Text as='div'>
-                    <Rating value={food.rating} text={`${food.numReviews}reviews`} />
+                    <Rating value={food.rating} text={`${food.numReviews} reviews`} />
                 </Card.Text>
-                <Card.Text as='h3'>Rp.{food.price}</Card.Text>
+                {/* <Card.Text as='h3'>Rp.{food.price}</Card.Text> */}
             </Card.Body>
         </Card>
     )

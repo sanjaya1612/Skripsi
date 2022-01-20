@@ -1,36 +1,48 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col} from 'react-bootstrap'
 import Food from '../components/Food'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listFoods } from '../actions/foodActions'
+import Paginate from '../components/Paginate'
+import {listFoods} from '../actions/foodActions'
+import SearchBox from '../components/SearchBox'
 
-const FoodScreen = () => {
+
+const FoodScreen = ({match}) => {
+    const keyword = match.params.keyword
+    const pageNumber = match.params.pageNumber || 1
     const dispatch = useDispatch()
 
     const foodList = useSelector(state => state.foodList)
-    const { loading, error, foods } = foodList
-
+    const { loading, error, foods, page, pages } = foodList
+    
     useEffect(() => {
-        dispatch(listFoods())
-    }, [dispatch])
+        dispatch(listFoods(keyword, pageNumber))
+    }, [dispatch, keyword, pageNumber])
+
     return (
         <>
             <h1>Sample Foods</h1>
+            <Route render={({ history }) => <SearchBox history={history}/>}/>
 
             {loading ? (
                 <Loader />
             ) : error ? (
                 <Message variant='danger'>{error}</Message>
             ) : (
+                <>  
                 <Row>
                     {foods.map(food => (
                         <Col key={food._id} sm={12} md={6} lg={4} xl={3}>
+                            <br/>
                             <Food food={food} />
                         </Col>
                     ))}
                 </Row>
+                <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''}/>
+                </>
             )}
         </>
     )

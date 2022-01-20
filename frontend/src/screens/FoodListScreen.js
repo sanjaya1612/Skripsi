@@ -4,61 +4,63 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listProducts, deleteProduct, createProduct} from '../actions/productActions'
-import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+import Paginate from '../components/Paginate'
+import { listFoods, deleteFood, createFood } from '../actions/foodActions'
+import { FOOD_CREATE_RESET } from '../constants/foodConstants'
 
-const ActivityListScreen = ({history, match}) => {
+const FoodListScreen = ({history, match}) => {
+const pageNumber = match.params.pageNumber || 1
+
     const dispatch = useDispatch()
 
-    const productList = useSelector(state => state.productList)
-    const { loading, error, products } = productList
+    const foodList = useSelector(state => state.foodList)
+    const { loading, error, foods, page, pages } = foodList
 
-    const productDelete = useSelector(state => state.productDelete)
-    const { loading:loadingDelete, error:errorDelete, success:successDelete } = productDelete
+    const foodDelete = useSelector( state => state.foodDelete)
+    const { loading:loadingDelete, error:errorDelete, success:successDelete } = foodDelete
 
-    const productCreate = useSelector(state => state.productCreate)
+    const foodCreate = useSelector(state => state.foodCreate)
     const { 
-        loading: loadingCreate, 
+        loading: loadingCreate,
         error: errorCreate, 
         success: successCreate,
-        product: createdProduct 
-    } = productCreate
+        food: createdFood 
+    } = foodCreate
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
     useEffect(() => {
-        dispatch({type: PRODUCT_CREATE_RESET})
+        dispatch({type: FOOD_CREATE_RESET})
 
         if (!userInfo.isAdmin) {
             history.push('/login')
         }
-
         if(successCreate) {
-            history.push(`/admin/activity/${createdProduct._id}/edit`)
+            history.push(`/admin/food/${createdFood._id}/edit`) 
         }else{
-            dispatch(listProducts())
+            dispatch(listFoods('', pageNumber))
         }
-    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct])
+    }, [dispatch, history, userInfo, successDelete, successCreate, createdFood, pageNumber])
 
-    const deleteHandler = (id) => {
+    const deleteFoodHandler = (id) => {
         if(window.confirm('Are you sure ?')){
-            dispatch(deleteProduct(id))
+            dispatch(deleteFood(id))
         }
     }
 
-    const createActivityHandler = () =>{
-        dispatch(createProduct())
+    const createFoodHandler = () =>{
+        dispatch(createFood())
     }
     return (
         <>
             <Row className='align-items-center'>
                 <Col>
-                    <h1>Activities</h1>
+                    <h1>Foods List</h1>
                 </Col>
-                <Col>
-                    <Button onClick={createActivityHandler}>
-                        <i className='fas fa-plus'></i> Create new activity
+                <Col className='text-right'>
+                    <Button className='my-3' onClick={createFoodHandler}>
+                        <i className='fas fa-plus'></i> Create New Food
                     </Button>
                 </Col>
             </Row>
@@ -68,40 +70,37 @@ const ActivityListScreen = ({history, match}) => {
             {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
                 : (
+                    <>
                     <Table striped bordered hover responsive className='table-sm'>
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Price</th>
-                                <th>Destination</th>
+                                <th>Province</th>
                                 <th>City</th>
-                                <th>Category</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map((product) => (
-                                <tr key={product._id}>
-                                    <td>{product._id}</td>
-                                    <td>{product.name}</td>
-                                    <td>Rp.{product.price}</td>
+                            {foods.map((food) => (
+                                <tr key={food._id}>
+                                    <td>{food._id}</td>
+                                    <td>{food.name}</td>
+                                    <td>Rp.{food.price}</td>
                                     <td>
-                                        {product.destination}
+                                        {food.province}
                                     </td>
                                     <td>
-                                        {product.city}
+                                        {food.city}
                                     </td>
                                     <td>
-                                        {product.category}
-                                    </td>
-                                    <td>
-                                        <LinkContainer to={`/admin/activity/${product._id}/edit`}>
+                                        <LinkContainer to={`/admin/food/${food._id}/edit`}>
                                             <Button variant='light' className='btn-sm'>
                                                 <i className='fas fa-edit'></i>
                                             </Button>
                                         </LinkContainer>
-                                        <Button variant='light' className='btn-sm' onClick={() => deleteHandler(product._id)}>
+                                        <Button variant='light' className='btn-sm' onClick={() => deleteFoodHandler(food._id)}>
                                             <i className='fas fa-trash'></i>
                                         </Button>
                                     </td>
@@ -109,10 +108,12 @@ const ActivityListScreen = ({history, match}) => {
                             ))}
                         </tbody>
                     </Table>
+                    <Paginate pages={pages} page={page } isAdmin={true} />
+                    </>
                 )
             }
         </>
     )
 }
 
-export default ActivityListScreen
+export default FoodListScreen

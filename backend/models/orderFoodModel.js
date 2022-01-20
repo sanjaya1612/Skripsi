@@ -16,6 +16,7 @@ const orderFoodSchema = mongoose.Schema({
                 required: true,
                 ref: 'Food'
             },
+            image: { type: String, required: true },
         }
     ],
     shippingAddress: {
@@ -59,7 +60,7 @@ const orderFoodSchema = mongoose.Schema({
         required: true,
         default: false
     },
-    dliveredAt: {
+    deliveredAt: {
         type: Date,
     },
 }, {

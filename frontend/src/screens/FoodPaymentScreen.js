@@ -11,7 +11,7 @@ const FoodPaymentScreen = ({ history }) => {
     if (!shippingAddress) {
         history.push('/shipping')
     }
-    const [paymentMethod, setPaymentMethod] = useState('BCA bank transfer')
+    const [paymentMethod, setPaymentMethod] = useState('PayPal')
 
     const dispatch = useDispatch()
 
@@ -32,21 +32,21 @@ const FoodPaymentScreen = ({ history }) => {
                 <Col>
                     <Form.Check
                         type='radio'
-                        label='BCA bank transfer'
-                        id='Bca'
+                        label='PayPal or Credit Card'
+                        id='PayPal'
                         name='paymentMethod'
-                        value='Bca'
+                        value='PayPal'
                         checked
                         onChange={(e) => setPaymentMethod(e.target.value)}>
                     </Form.Check>
-                    <Form.Check
+                    {/* <Form.Check
                         type='radio'
                         label='PayPal or Credit Card'
                         id='PayPal'
                         name='paymentMethod'
                         value='PayPal'
                         onChange={(e) => setPaymentMethod(e.target.value)}>
-                    </Form.Check>
+                    </Form.Check> */}
                 </Col>
                 </Form.Group>
                 <br />
