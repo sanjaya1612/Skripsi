@@ -20,6 +20,11 @@ const ActivityEditScreen = ({ match, history }) => {
     const [countInStock, setCountInStock] = useState(0)
     const [destination, setDestination] = useState('')
     const [city, setCity] = useState('')
+    const [itinerary1, setitinerary1] = useState('')
+    const [itinerary2, setitinerary2] = useState('')
+    const [itinerary3, setitinerary3] = useState('')
+    const [itinerary4, setitinerary4] = useState('')
+    const [itinerary5, setitinerary5] = useState('')
     const [description, setDescription] = useState('')
     const [uploading, setUploading] = useState(false)
 
@@ -47,6 +52,11 @@ const ActivityEditScreen = ({ match, history }) => {
                 setDestination(product.destination)
                 setCity(product.city)
                 setDescription(product.description)
+                setitinerary1(product.itinerary1)
+                setitinerary2(product.itinerary2)
+                setitinerary3(product.itinerary3)
+                setitinerary4(product.itinerary4)
+                setitinerary5(product.itinerary5)
             }
         }
     }, [dispatch, history, productId, product, successUpdate])
@@ -84,6 +94,11 @@ const ActivityEditScreen = ({ match, history }) => {
             destination,
             city,
             description,
+            itinerary1,
+            itinerary2,
+            itinerary3,
+            itinerary4,
+            itinerary5,
             countInStock
 
         }))
@@ -102,7 +117,7 @@ const ActivityEditScreen = ({ match, history }) => {
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                                 type='name'
-                                placeholder='Enter Your Name'
+                                placeholder='Enter Name'
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}></Form.Control>
                         </Form.Group>
@@ -173,6 +188,47 @@ const ActivityEditScreen = ({ match, history }) => {
                                 placeholder='Enter description'
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId='desctiption'>
+                            <Form.Label>Itinerary</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter iteneray'
+                                value={itinerary1}
+                                onChange={(e) => setitinerary1(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='desctiption'>
+                            <Form.Label>Itinerary</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter iteneray'
+                                value={itinerary2}
+                                onChange={(e) => setitinerary2(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='desctiption'>
+                            <Form.Label>Itinerary</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter iteneray'
+                                value={itinerary3}
+                                onChange={(e) => setitinerary3(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='desctiption'>
+                            <Form.Label>Itinerary</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter iteneray'
+                                value={itinerary4}
+                                onChange={(e) => setitinerary4(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='desctiption'>
+                            <Form.Label>Itinerary</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter iteneray'
+                                value={itinerary5}
+                                onChange={(e) => setitinerary5(e.target.value)}></Form.Control>
                         </Form.Group>
                         <br />
                         <Button type='submit' variant='primary'>Update</Button>

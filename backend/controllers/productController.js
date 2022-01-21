@@ -36,16 +36,21 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 const createProduct = asyncHandler(async (req, res) => {
     const product = new Product({
-        name: 'Sample Name',
+        name: 'sample name',
         price: 0,
         user: req.user._id,
         image: '/images/sample.png',
-        category: 'Sample category',
-        destination: 'Sample destination',
-        city: 'Sample city',
+        category: 'sample category',
+        destination: 'sample',
+        city: 'sample',
+        itinerary1: '',
+        itinerary2: '',
+        itinerary3: '',
+        itinerary4: '',
+        itinerary5: '',
         countInStock: 0,
         numReviews: 0,
-        description: 'Sample description'
+        description: 'sample'
     })
 
     const createdProduct = await product.save()
@@ -57,6 +62,11 @@ const updateProduct = asyncHandler(async (req, res) => {
         name,
         price,
         description,
+        itinerary1,
+        itinerary2,
+        itinerary3,
+        itinerary4,
+        itinerary5,
         image,
         category,
         destination,
@@ -69,6 +79,11 @@ const updateProduct = asyncHandler(async (req, res) => {
         product.name = name
         product.price = price
         product.description = description
+        product.itinerary1 = itinerary1
+        product.itinerary2 = itinerary2
+        product.itinerary3 = itinerary3
+        product.itinerary4 = itinerary4
+        product.itinerary5 = itinerary5
         product.image = image
         product.category = category
         product.destination = destination

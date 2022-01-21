@@ -7,36 +7,26 @@ import { createOrder } from '../actions/orderActions'
 
 const ActivityPlaceOrderScreen = ({ history }) => {
     const dispatch = useDispatch()
-    // const [orderItems, setItems] = useState("")
-    // const [paymentMethod, setPaymentMethod] = useState("")
-    // const [itemPrice, setPrice] = useState("")
-    // const [taxPrice, setTaxPrice] = useState("")
-    // const [totalPrice, setTotalPrice] = useState("")
-    // const [userId, setUserId] = useState("")
     const productDetails = useSelector(state => state.productDetails)
     const { product } = productDetails
     const cart = useSelector((state) => state.cart)
 
-    // const orderCreate = useSelector(state => state.orderCreate)
-    // const { order, success, error } = orderCreate
+    //calculation
+    cart.itemPrice = Number(localStorage.Qty * product.price)
+    cart.taxPrice = Number((0.10 * cart.itemPrice))
+    cart.totalPrice = Number((localStorage.Qty * product.price) + cart.taxPrice)
 
-    // useEffect(() => {
-    //     if (success) {
-    //         history.push(`/order/${order._id}`)
-    //     }
-    //     // eslint-disable-next-line
-    // }, [history, success])
     const orderCreate = useSelector(state => state.orderCreate)
-    const { order, success } = orderCreate
+    const { order, success } = orderCreate 
 
     useEffect(() => {
         if (success) {
-            history.push(`/order/${order._id}`)
+            history.push(`/orders/${order._id}`)
         }
         //eslint-disable-next-line
     }, [history, success])
     const activityPlaceOrderHandler = () => {
-        dispatch(createOrder({
+        dispatch(createOrder({ 
             orderItems: product.name,
             date: localStorage.getItem("Date"),
             paymentMethod: cart.paymentMethod,
@@ -50,10 +40,7 @@ const ActivityPlaceOrderScreen = ({ history }) => {
         dispatch(listProductDetails(localStorage.getItem("PId")))
     }, [dispatch])
 
-    //calculation
-    cart.itemPrice = Number(localStorage.Qty * product.price)
-    cart.taxPrice = Number((0.10 * cart.itemPrice))
-    cart.totalPrice = Number((localStorage.Qty * product.price) + cart.taxPrice)
+    
 
 
     return (

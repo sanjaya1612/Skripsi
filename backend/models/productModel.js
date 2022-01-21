@@ -13,6 +13,7 @@ const reviewSchema = mongoose.Schema({
     timestamps : true
 })
 
+
 const productSchema = mongoose.Schema(
     {
     user:{
@@ -43,6 +44,21 @@ const productSchema = mongoose.Schema(
     description:{
         type: String,
         required: true,
+    },
+    itinerary1:{
+        type: String,
+    },
+    itinerary2:{
+        type: String,
+    },
+    itinerary3:{
+        type: String,
+    },
+    itinerary4:{
+        type: String,
+    },
+    itinerary5:{
+        type: String,
     },
     reviews:[reviewSchema],
     rating:{

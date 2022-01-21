@@ -7,7 +7,7 @@ const Food = ({ food }) => {
     return (
         <Card className='mb-3' style={{ width: '17rem' }}>
             <Link to={`/food/${food._id}`}>
-                <Card.Img variant="top" src={food.image} width={110} height={200} />
+                <Card.Img variant="top" src={food.image} width={110} height={200}/>
             </Link>
             <Card.Body>
                 <Link to={`/food/${food._id}`}>

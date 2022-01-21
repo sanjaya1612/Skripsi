@@ -21,7 +21,7 @@ const ActivityScreen = ({match}) => {
 
     return (
         <>
-            <h1>Sample Activities</h1>
+            <h1>Activities <i class="fas fa-snowboarding"></i></h1>
             <Route render={({ history }) => <ActivitySearchBox history={history}/>}/>
 
             {loading ? (

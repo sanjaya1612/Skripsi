@@ -29,11 +29,11 @@ const ProductScreen = ({ history, match }) => {
     const [message, setMessage] = useState()
 
     useEffect(() => {
-        if(successProductReview) {
+        if (successProductReview) {
             alert('Review Submitted!')
             setRating(0)
             setComment('')
-            dispatch({ type: PRODUCT_CREATE_REVIEW_RESET})
+            dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
         }
         dispatch(listProductDetails(match.params.id))
     }, [dispatch, match, successProductReview])
@@ -51,27 +51,25 @@ const ProductScreen = ({ history, match }) => {
     }
 
     const submitHandler = (e) => {
-        console.log(rating)
-        console.log(comment)
         e.preventDefault()
         dispatch(createProductReview(match.params.id, {
             rating,
             comment
         }))
-        setTimeout(function(){
+        setTimeout(function () {
             window.location.reload()
         }, 3000);
     }
     return (
         <>
-            <Link className='btn btn-secondary my-3' to='/'><i className="fas fa-arrow-left"></i> Go Back
+            <Link className='btn btn-secondary my-3' to='/activities'><i className="fas fa-arrow-left"></i> Go Back
             </Link>
             {message && <Message variant='danger'>{message}</Message>}
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
                 <>
                     <Row>
                         <Col md={6}>
-                            <Image src={product.image} alt={product.name} width={500} />
+                            <Image className='activity-image' src={product.image} alt={product.name} />
                             <ListGroup variant='flush'>
                                 <ListGroup.Item>
                                     <h3>{product.name}</h3>
@@ -83,7 +81,16 @@ const ProductScreen = ({ history, match }) => {
                                     Price : Rp.{product.price}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Description : {product.description}
+                                    <strong>Description : </strong>
+                                    <p>{product.description}</p>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                    <strong>Itinerary : </strong>
+                                    <p>{product.itinerary1}</p>
+                                    <p>{product.itinerary2}</p>
+                                    <p>{product.itinerary3}</p>
+                                    <p>{product.itinerary4}</p>
+                                    <p>{product.itinerary5}</p>
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
@@ -172,7 +179,7 @@ const ProductScreen = ({ history, match }) => {
                                                 <Form.Label>Comment</Form.Label>
                                                 <Form.Control as='textarea' row='3' value={comment} onChange={(e) => setComment(e.target.value)}></Form.Control>
                                             </Form.Group>
-                                            <br/>
+                                            <br />
                                             <Button type='submit' variant='primary'>Submit</Button>
                                         </Form>
                                     ) : (

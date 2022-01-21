@@ -60,7 +60,7 @@ const FoodDetailsScreen = ({ history, match }) => {
                 <>
                     <Row>
                         <Col md={6}>
-                            <Image src={food.image} alt={food.name} width={500} />
+                            <Image className='food-image'src={food.image} alt={food.name} />
                             <ListGroup variant='flush'>
                                 <ListGroup.Item>
                                     <h3>{food.name}</h3>
@@ -70,6 +70,9 @@ const FoodDetailsScreen = ({ history, match }) => {
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     Price : Rp.{food.price}
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                    Details : {food.details}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     Description : {food.description}

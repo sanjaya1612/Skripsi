@@ -4,6 +4,7 @@ import { Row, Col, Container, Image, Carousel } from 'react-bootstrap'
 import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import VideoJS from '../components/VideoJS'
 import { listProducts } from '../actions/productActions'
 
 const HomeScreen = () => {
@@ -58,6 +59,7 @@ const HomeScreen = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
+                <br />
                 <h1>What We Serve</h1>
                 <h2>Top Values For You...</h2>
                 <br />
@@ -77,6 +79,7 @@ const HomeScreen = () => {
                 </Row>
                 <br />
             </Container>
+            <br />
             <Row>
                 <h2 style={{ textAlign: 'center' }}>About Us</h2>
                 <Col>
@@ -85,9 +88,18 @@ const HomeScreen = () => {
                         there is also a food feature to be able to buy food from an area and send it to you.</p>
                 </Col>
             </Row>
+            <br />
+            <Row>
+
+                <h1>Let's Explore The Beauty of Indonesia</h1>
+                <Col>
+                    <VideoJS />
+                </Col>
+            </Row>
             <Container>
 
             </Container>
+            <br />
             <h1>Favorite Activities</h1>
 
             {loading ? (
