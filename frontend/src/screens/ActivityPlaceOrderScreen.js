@@ -9,38 +9,44 @@ const ActivityPlaceOrderScreen = ({ history }) => {
     const dispatch = useDispatch()
     const productDetails = useSelector(state => state.productDetails)
     const { product } = productDetails
+    const booking = useSelector((state) => state.cart.booking)
     const cart = useSelector((state) => state.cart)
 
     //calculation
-    cart.itemPrice = Number(localStorage.Qty * product.price)
-    cart.taxPrice = Number((0.10 * cart.itemPrice))
-    cart.totalPrice = Number((localStorage.Qty * product.price) + cart.taxPrice)
+    booking.itemPrice = Number(localStorage.Qty * product.price)
+    booking.taxPrice = Number((0.10 * booking.itemPrice))
+    booking.totalPrice = Number((localStorage.Qty * product.price) + booking.taxPrice)
+
 
     const orderCreate = useSelector(state => state.orderCreate)
-    const { order, success } = orderCreate 
+    const { order, success } = orderCreate
 
-    useEffect(() => {
-        if (success) {
-            history.push(`/orders/${order._id}`)
-        }
-        //eslint-disable-next-line
+    
+
+     useEffect(() => {
+         if (success) {
+             history.push(`/order/${order._id}`)
+         }
+         //eslint-disable-next-line
     }, [history, success])
+
     const activityPlaceOrderHandler = () => {
-        dispatch(createOrder({ 
+        dispatch(createOrder({
             orderItems: product.name,
-            date: localStorage.getItem("Date"),
+            qty: localStorage.Qty,
+            date: localStorage.getItem("Date"), 
+            phoneNumber: booking.phoneNumber,
+            fullName: booking.fullName,
             paymentMethod: cart.paymentMethod,
-            itemPrice: cart.itemPrice,
-            taxPrice: cart.taxPrice,
-            totalPrice: cart.totalPrice,
+            itemPrice: booking.itemPrice,
+            taxPrice: booking.taxPrice,
+            totalPrice: booking.totalPrice,
         }))
 
     }
     useEffect(() => {
         dispatch(listProductDetails(localStorage.getItem("PId")))
     }, [dispatch])
-
-    
 
 
     return (
@@ -53,15 +59,15 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                             <h2>Booking</h2>
                             <p>
                                 <strong>Name: </strong>
-                                {cart.booking.fullName}
+                                {booking.fullName}
                             </p>
                             <p>
                                 <strong>E-mail: </strong>
-                                {cart.booking.email}
+                                {booking.email}
                             </p>
                             <p>
                                 <strong>Phone number: </strong>
-                                {cart.booking.phoneNumber}
+                                {booking.phoneNumber}
                             </p>
                             <p>
                                 <strong>Date: </strong>
@@ -107,22 +113,15 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col>Rp.{cart.taxPrice}</Col>
+                                    <Col>Rp.{booking.taxPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total</Col>
-                                    <Col>Rp.{cart.totalPrice}</Col>
+                                    <Col>Rp.{booking.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            {/* <ListGroup.Item>
-                                <Button
-                                    type='button'
-                                    className='w-100'
-                                    onClick={activityPlaceOrderHandler}
-                                >Place Order</Button>
-                            </ListGroup.Item> */}
                         </ListGroup>
                     </Card>
                     <br />

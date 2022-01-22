@@ -1,29 +1,28 @@
 import mongoose from 'mongoose' 
 
-const orderSchema = mongoose.Schema({
+const orderSchema = mongoose.Schema({ 
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId, 
         required: true,
         ref: 'User'
     },
-    orderItems: [
-        {
-            name: { type: String, required: true },
-            qty: { type: Number, required: true },
-            price: { type: Number, required: true },
-            order: {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-                ref: 'Product'
-            },
-            image: { type: String, required: true },
-        }
-    ],
+    orderItems: {
+        type: String,
+        required: true
+    },
+    qty:{
+        type: Number,
+        required: true
+    },
     date:{
         type:Date,
         required: true,
     },
-    phoneNum:{
+    fullName:{
+        type: String,
+        required: true
+    },
+    phoneNumber:{
         type: String,
         required: true
     },
@@ -48,10 +47,6 @@ const orderSchema = mongoose.Schema({
     totalPrice:{
         type: String,
         required: true,
-    },
-    userId:{
-        type: String,
-        required :true
     },
     isPaid: {
         type: Boolean,

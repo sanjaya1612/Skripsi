@@ -11,7 +11,7 @@ const PaymentScreen = ({ history }) => {
     if (!booking) {
         history.push('/booking')
     }
-    const [paymentMethod, setPaymentMethod] = useState('BCA bank transfer')
+    const [paymentMethod, setPaymentMethod] = useState('PayPal')
 
     const dispatch = useDispatch()
 
@@ -30,12 +30,12 @@ const PaymentScreen = ({ history }) => {
                         Select Method
                     </Form.Label>
                 <Col>
-                    <Form.Check
+                <Form.Check
                         type='radio'
-                        label='BCA bank transfer'
-                        id='Bca'
+                        label='PayPal or Credit Card'
+                        id='PayPal'
                         name='paymentMethod'
-                        value='Bca'
+                        value='PayPal'
                         checked
                         onChange={(e) => setPaymentMethod(e.target.value)}>
                     </Form.Check>

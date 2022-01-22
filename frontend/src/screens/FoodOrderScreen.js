@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { PayPalButton } from 'react-paypal-button-v2'
-import { Button, Row, Col, ListGroup, Image, Card} from 'react-bootstrap'
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -34,7 +34,7 @@ const FoodOrderScreen = ({ match, history }) => {
     }
 
     useEffect(() => {
-        if(!userInfo){
+        if (!userInfo) {
             history.push('/login')
         }
         const addPayPalScript = async () => {
@@ -52,8 +52,8 @@ const FoodOrderScreen = ({ match, history }) => {
             dispatch({ type: ORDER_FOOD_PAY_RESET })
             dispatch({ type: ORDER_FOOD_DELIVER_RESET })
             dispatch(getOrderFoodDetails(orderId))
-        } else if(!order.isPaid) {
-            if(!window.paypal) {
+        } else if (!order.isPaid) {
+            if (!window.paypal) {
                 addPayPalScript()
             } else {
                 setSdkReady(true)
@@ -92,8 +92,10 @@ const FoodOrderScreen = ({ match, history }) => {
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Payment Method</h2>
-                            <strong>Method: </strong>
-                            {order.paymentMethod}
+                            <p>
+                                <strong>Method: </strong>
+                                {order.paymentMethod}
+                            </p>
                             {order.isPaid ? <Message variant='success'>Paid on {order.paidAt}</Message> : <Message variant='danger'>Not paid</Message>}
                         </ListGroup.Item>
                         <ListGroup.Item>
@@ -154,17 +156,17 @@ const FoodOrderScreen = ({ match, history }) => {
                                 <ListGroup.Item>
                                     {loadingPay && <Loader />}
                                     {!sdkReady ? <Loader /> : (
-                                        <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler}/>
+                                        <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler} />
                                     )}
                                 </ListGroup.Item>
                             )}
                             {loadingDeliver && <Loader />}
                             {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                                 <ListGroup.Item>
-                                    <Button 
-                                    type='button' 
-                                    className='w-100' 
-                                    onClick={deliverHandler}>
+                                    <Button
+                                        type='button'
+                                        className='w-100'
+                                        onClick={deliverHandler}>
                                         Mark As Deliver
                                     </Button>
                                 </ListGroup.Item>
