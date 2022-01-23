@@ -57,7 +57,7 @@ const ActivityListScreen = ({history, match}) => {
                     <h1>Activities</h1>
                 </Col>
                 <Col>
-                    <Button onClick={createActivityHandler}>
+                    <Button onClick={createActivityHandler} className='tomboladd'>
                         <i className='fas fa-plus'></i> Create new activity
                     </Button>
                 </Col>

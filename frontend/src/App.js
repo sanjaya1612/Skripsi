@@ -28,6 +28,10 @@ import UserEditScreen from "./screens/UserEditScreen";
 import ActivityScreen from "./screens/ActivityScreen";
 import ActivityListScreen from "./screens/ActivityListScreen";
 import ActivityEditScreen from "./screens/ActivityEditScreen";
+import HotelScreen from "./screens/HotelScreen";
+import HotelDetailsScreen from "./screens/HotelDetailsScreen";
+import HotelListScreen from "./screens/HotelListScreen";
+import HotelEditScreen from "./screens/HotelEditScreen";
 
 function App() {
   return (
@@ -49,11 +53,15 @@ function App() {
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/foods' component={FoodScreen}/>
           <Route path='/activities' component={ActivityScreen}/>
+          <Route path='/hotels' component={HotelScreen}/>
           <Route path='/product/:id' component={ProductScreen} />
           <Route path='/food/:id' component={FoodDetailsScreen} />
+          <Route path='/hotel/:id' component={HotelDetailsScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
           <Route path='/admin/userlist' component={UserListScreen} />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />
+          <Route path='/admin/hotellist' component={HotelListScreen} />
+          <Route path='/admin/hotel/:id/edit' component={HotelEditScreen} />
           <Route path='/admin/foodlist' component={FoodListScreen} exact/>
           <Route path='/admin/foodlist/:pageNumber' component={FoodListScreen} exact/>
           <Route path='/admin/food/:id/edit' component={FoodEditScreen} />

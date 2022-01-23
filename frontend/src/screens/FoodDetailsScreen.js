@@ -52,8 +52,8 @@ const FoodDetailsScreen = ({ history, match }) => {
     }
     return (
         <>
-            <Link className='btn btn-secondary my-3' to='/foods'><i className="fas fa-arrow-left"></i>
-                Go Back
+            <Link className='btn btn-dark my-3' to='/foods'>
+                Back
             </Link>
             {message && <Message variant='danger'>{message}</Message>}
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (

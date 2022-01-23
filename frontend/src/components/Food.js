@@ -16,7 +16,6 @@ const Food = ({ food }) => {
                 <Card.Text as='div'>
                     <Rating value={food.rating} text={`${food.numReviews} reviews`} />
                 </Card.Text>
-                {/* <Card.Text as='h3'>Rp.{food.price}</Card.Text> */}
             </Card.Body>
         </Card>
     )

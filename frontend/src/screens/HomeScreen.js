@@ -1,22 +1,11 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
 import { Row, Col, Container, Image, Carousel } from 'react-bootstrap'
-import Product from '../components/Product'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
+import TopActivities from '../components/TopActivities'
+import TopFoods from '../components/TopFoods'
 import VideoJS from '../components/VideoJS'
-import { listProducts } from '../actions/productActions'
 
 const HomeScreen = () => {
-    const dispatch = useDispatch()
-
-    const productList = useSelector(state => state.productList)
-    const { loading, error, products } = productList
-
-    useEffect(() => {
-        dispatch(listProducts())
-    }, [dispatch])
-
+    
     return (
         <>
             <Container> <Carousel>
@@ -29,7 +18,7 @@ const HomeScreen = () => {
                     />
                     <Carousel.Caption>
                         <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <>Nulla vitae elit libero, a pharetra augue mollis interdum.</>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -42,7 +31,7 @@ const HomeScreen = () => {
 
                     <Carousel.Caption>
                         <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -55,7 +44,7 @@ const HomeScreen = () => {
 
                     <Carousel.Caption>
                         <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        <>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
@@ -94,27 +83,19 @@ const HomeScreen = () => {
                 <h1>Let's Explore The Beauty of Indonesia</h1>
                 <Col>
                     <VideoJS />
+                    <br/>
                 </Col>
             </Row>
             <Container>
 
             </Container>
             <br />
-            <h1>Favorite Activities</h1>
+            <TopActivities />
 
-            {loading ? (
-                <Loader />
-            ) : error ? (
-                <Message variant='danger'>{error}</Message>
-            ) : (
-                <Row>
-                    {products.map(product => (
-                        <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                            <Product product={product} />
-                        </Col>
-                    ))}
-                </Row>
-            )}
+            <br />
+            <TopFoods />
+
+            
         </>
     )
 }

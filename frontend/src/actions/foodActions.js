@@ -17,7 +17,10 @@ import {
     FOOD_CREATE_FAIL,
     FOOD_UPDATE_REQUEST,
     FOOD_UPDATE_SUCCESS,
-    FOOD_UPDATE_FAIL
+    FOOD_UPDATE_FAIL,
+    FOOD_TOP_REQUEST,
+    FOOD_TOP_SUCCESS,
+    FOOD_TOP_FAIL
 } from '../constants/foodConstants'
 
 export const listFoods = (keyword = '', pageNumber = '') => async (dispatch) => {
@@ -179,6 +182,26 @@ export const updateFood = (food) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: FOOD_UPDATE_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+export const listTopFoods = () => async (dispatch) => {
+    try {
+        dispatch({ type: FOOD_TOP_REQUEST })
+        const { data } = await axios.get(`/api/foods/topfoods`)
+
+        dispatch({
+            type: FOOD_TOP_SUCCESS,
+            payload: data,
+        })
+    } catch (error) {
+        dispatch({
+            type: FOOD_TOP_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

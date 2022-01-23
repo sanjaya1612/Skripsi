@@ -109,6 +109,12 @@ body{
   height: 43px;
   transform: translateY(-50%);
 }
+.tomboladd{
+	position: absolute;
+	right: 186px;
+	height: 43px;
+	transform: translateY(-50%);
+}
 
 /*responsive*/
 @media(max-width: 767px){
@@ -237,3 +243,12 @@ body{
 	width: 530px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   }
+
+  .hotel-image{
+	border-radius: 5px;
+	height: 400px;
+	width: 530px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+
+  

@@ -10,6 +10,7 @@ import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import orderFoodRoutes from './routes/orderFoodRoutes.js'
 import foodRoutes from './routes/foodRoutes.js'
+import hotelRoutes from './routes/hotelRoutes.js'
 
 dotenv.config()
 
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/products', productRoutes)
 app.use('/api/foods', foodRoutes)
+app.use('/api/hotels', hotelRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)

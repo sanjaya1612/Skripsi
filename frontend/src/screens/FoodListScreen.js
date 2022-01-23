@@ -59,7 +59,7 @@ const pageNumber = match.params.pageNumber || 1
                     <h1>Foods List</h1>
                 </Col>
                 <Col className='text-right'>
-                    <Button className='my-3' onClick={createFoodHandler}>
+                    <Button className='tomboladd' onClick={createFoodHandler}>
                         <i className='fas fa-plus'></i> Create New Food
                     </Button>
                 </Col>

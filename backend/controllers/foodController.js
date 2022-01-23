@@ -83,7 +83,7 @@ const updateFood = asyncHandler(async (req, res) => {
         res.status(201).json(updatedFood)
     } else {
         res.status(404)
-        throw new Error('Food not found')
+        throw new Error('Food not found') 
     }
 
 })
@@ -121,11 +121,18 @@ const createFoodReview = asyncHandler(async (req, res) => {
     }
 })
 
+const getTopFoods = asyncHandler(async (req, res) => {
+    const foods = await Food.find({}).sort({ rating: -1}).limit(4)
+
+    res.json(foods)
+})
+
 export {
     getFoods,
     getFoodById,
     createFoodReview,
     deleteFood,
     createFood,
-    updateFood
+    updateFood,
+    getTopFoods
 }

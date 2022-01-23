@@ -1,22 +1,32 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { 
-    productListReducer, 
+import {
+    productListReducer,
     productDetailsReducer,
     productDeleteReducer,
     productCreateReducer,
     productUpdateReducer,
-    productCreateReviewReducer
+    productCreateReviewReducer,
+    productTopRatedReducer
 } from './reducers/productReducers'
-import { 
-    foodListReducer, 
+import {
+    foodListReducer,
     foodDetailsReducer,
     foodDeleteReducer,
     foodCreateReducer,
     foodUpdateReducer,
     foodReviewCreateReducer,
+    foodTopRatedReducer,
 } from './reducers/foodReducers'
+import {
+    hoteltListReducer,
+    hotelDetailsReducer,
+    hotelDeleteReducer,
+    hotelCreateReducer,
+    hotelUpdateReducer,
+    hotelReviewCreateReducer,
+} from './reducers/hotelReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
     userLoginReducer,
@@ -28,8 +38,8 @@ import {
     userUpdateReducer
 } from './reducers/userReducers'
 
-import { 
-    orderFoodCreateReducer, 
+import {
+    orderFoodCreateReducer,
     orderFoodDetailsReducer,
     orderFoodPayReducer,
     orderFoodDeliverReducer,
@@ -37,10 +47,10 @@ import {
     orderListFoodReducer
 } from './reducers/orderFoodReducers'
 
-import { 
-    orderCreateReducer, 
+import {
+    orderCreateReducer,
     orderDetailsReducer,
-    orderPayReducer, 
+    orderPayReducer,
 } from './reducers/orderReducers'
 
 const reducer = combineReducers({
@@ -50,12 +60,20 @@ const reducer = combineReducers({
     productCreate: productCreateReducer,
     productUpdate: productUpdateReducer,
     productCreateReview: productCreateReviewReducer,
+    productTopRated: productTopRatedReducer,
     foodList: foodListReducer,
     foodDetails: foodDetailsReducer,
     foodDelete: foodDeleteReducer,
     foodCreate: foodCreateReducer,
     foodUpdate: foodUpdateReducer,
     foodReviewCreate: foodReviewCreateReducer,
+    foodTopRated: foodTopRatedReducer,
+    hotelList: hoteltListReducer,
+    hotelDetails: hotelDetailsReducer,
+    hotelDelete: hotelDeleteReducer,
+    hotelCreate: hotelCreateReducer,
+    hotelUpdate: hotelUpdateReducer,
+    hotelReviewCreate: hotelReviewCreateReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
@@ -73,7 +91,6 @@ const reducer = combineReducers({
     orderFoodDeliver: orderFoodDeliverReducer,
     orderListMyFood: orderListMyFoodReducer,
     orderListFood: orderListFoodReducer,
-
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
@@ -90,7 +107,7 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
     ? JSON.parse(localStorage.getItem('shippingAddress'))
     : {}
 const initialState = {
-    cart: 
+    cart:
     {
         cartItems: cartItemsFromStorage,
         booking: bookingFromStorage,
