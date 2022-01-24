@@ -33,10 +33,15 @@ import HotelDetailsScreen from "./screens/HotelDetailsScreen";
 import HotelListScreen from "./screens/HotelListScreen";
 import HotelEditScreen from "./screens/HotelEditScreen";
 import HotelSearchResult from "./screens/HotelSearchResult";
+import HotelBookingScreen from "./screens/HotelBookingScreen";
+import HotelPaymentScreen from "./screens/HotelPaymentScreen";
+import ScrollToTop from "./components/ScrollToTop";
+
 
 function App() {
   return (
     <Router>
+      <ScrollToTop/>
       <Header />
       <main className="py-3">
         <Container>
@@ -44,8 +49,10 @@ function App() {
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/FAQ' component={FaqScreen} />
           <Route path='/payment' component={PaymentScreen} />
+          <Route path='/hotelpayment' component={HotelPaymentScreen} />
           <Route path='/foodpayment' component={FoodPaymentScreen} />
           <Route path='/booking' component={BookingScreen} />
+          <Route path='/hotelbooking' component={HotelBookingScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/activityplaceorder' component={ActivityPlaceOrderScreen} />
           <Route path='/foodplaceorder' component={FoodPlaceOrderScreen} />

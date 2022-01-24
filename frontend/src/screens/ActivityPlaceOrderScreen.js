@@ -56,7 +56,7 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                 <Col md={8}>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2>Booking</h2>
+                            <h3>Booking</h3>
                             <p>
                                 <strong>Name: </strong>
                                 {booking.fullName}
@@ -76,13 +76,13 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <h2>Payment Method</h2>
+                            <h3>Payment Method</h3>
                             <strong>Method: </strong>
                             {cart.paymentMethod}
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <h2>Order Details</h2>
+                            <h3>Order Details</h3>
                             <Row>
                                 <Col md={2}>
                                     <Image src={product.image} alt={""} width={100} rounded />

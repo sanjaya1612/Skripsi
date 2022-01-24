@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Button, Form } from 'react-bootstrap'
+import { DateRangePicker } from 'rsuite';
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -11,9 +12,11 @@ import { HOTEL_CREATE_REVIEW_RESET } from '../constants/hotelConstants'
 
 
 
-const HotelDetailsScreen = ({ match }) => {
+const HotelDetailsScreen = ({ history, match }) => {
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
+    const [date, setDate] = useState('')
+    const [message, setMessage] = useState()
 
     const dispatch = useDispatch()
 
@@ -37,7 +40,14 @@ const HotelDetailsScreen = ({ match }) => {
     }, [dispatch, match, successHotelReview])
 
     const bookingHandler = () => {
-        console.log("masuk")
+        if (date === "") {
+            setMessage('Date must be filled')
+        }else{
+            localStorage.setItem("Date", date)
+            localStorage.setItem("PImage", hotel.image)
+            localStorage.setItem("PId", hotel._id)
+            history.push(`/login?redirect=hotelbooking/${match.params.id}`)
+        }
     }
 
     const submitHandler = (e) => {
@@ -102,6 +112,12 @@ const HotelDetailsScreen = ({ match }) => {
                                     </Col>
                                 </Row>
                             </ListGroup.Item>
+                            <ListGroup.Item>
+                                    <Row>
+                                        <Col>Select date : </Col>
+                                        <DateRangePicker size="lg" onChange={(dateString) => setDate(dateString)} className='w-100'/>
+                                    </Row>
+                                </ListGroup.Item>
                             <ListGroup>
                                 <br></br>
                                 <Button

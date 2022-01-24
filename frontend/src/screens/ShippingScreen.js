@@ -3,8 +3,7 @@ import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import FoodSteps from '../components/FoodSteps'
-import {saveShippingAddress} from '../actions/cartActions'
-
+import { saveShippingAddress } from '../actions/cartActions'
 
 const ShippingScreen = ({ history }) => {
     const cart = useSelector(state => state.cart)
@@ -19,13 +18,13 @@ const ShippingScreen = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(saveShippingAddress({ address,city,province,postalCode }))
+        dispatch(saveShippingAddress({ address, city, province, postalCode }))
         history.push('/foodpayment')
     }
 
     return <FormContainer>
-        <FoodSteps step1 step2/>
-        <h1>Shipping</h1>
+        <FoodSteps step1 step2 />
+        <h2>Shipping</h2>
         <Form onSubmit={submitHandler}>
             <Form.Group controlId='address'>
                 <Form.Label>Address</Form.Label>
@@ -61,12 +60,12 @@ const ShippingScreen = ({ history }) => {
                     placeholder='Enter your postal code'
                     value={postalCode}
                     required
-                    onChange={(e) => setPostalCode (e.target.value)}></Form.Control>
+                    onChange={(e) => setPostalCode(e.target.value)}></Form.Control>
             </Form.Group>
-            <br/>
+            <br />
             <Button type='submit' variant='primary'>
-                    Continue
-                </Button>
+                Continue
+            </Button>
         </Form>
     </FormContainer>
 }

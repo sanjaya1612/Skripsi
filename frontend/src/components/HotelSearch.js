@@ -24,7 +24,7 @@ const HotelSearch = () => {
     const handleSubmit = () => {
         history.push(`/search-hotel?location=${location}&date=${date}&bed=${bed}`)
     }
-
+ 
     const options = [{
         "label": 1,
         "value": 1,

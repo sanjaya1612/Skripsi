@@ -53,6 +53,10 @@ import {
     orderPayReducer,
 } from './reducers/orderReducers'
 
+import {
+    bookingReducer,
+} from './reducers/bookingReducers'
+
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
@@ -75,6 +79,7 @@ const reducer = combineReducers({
     hotelUpdate: hotelUpdateReducer,
     hotelReviewCreate: hotelReviewCreateReducer,
     cart: cartReducer,
+    booking: bookingReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
@@ -103,6 +108,9 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 const bookingFromStorage = localStorage.getItem('booking')
     ? JSON.parse(localStorage.getItem('booking'))
     : {}
+const bookingHotelFromStorage = localStorage.getItem('bookingHotel')
+    ? JSON.parse(localStorage.getItem('bookingHotel'))
+    : {}
 const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
     ? JSON.parse(localStorage.getItem('shippingAddress'))
     : {}
@@ -112,6 +120,9 @@ const initialState = {
         cartItems: cartItemsFromStorage,
         booking: bookingFromStorage,
         shippingAddress: shippingAddressFromStorage
+    },
+    booking:{
+        bookingHotel: bookingHotelFromStorage
     },
     userLogin: { userInfo: userInfoFromStorage },
 }

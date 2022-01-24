@@ -45,7 +45,7 @@ const FoodPlaceOrderScreen = ({ history }) => {
                 <Col md={8}>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2>Shipping</h2>
+                            <h3>Shipping</h3>
                             <>
                                 <strong>Addres: </strong>
                                 {cart.shippingAddress.address},
@@ -55,19 +55,19 @@ const FoodPlaceOrderScreen = ({ history }) => {
                             </>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <h2>Payment Method</h2>
+                            <h3>Payment Method</h3>
                             <strong>Method: </strong>
                             {cart.paymentMethod}
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <h2>Order Items</h2>
+                            <h3>Order Items</h3>
                             {cart.cartItems.length === 0 ? <Message>Your cart is empty</Message> : (
                                 <ListGroup variant='flush'>
                                     {cart.cartItems.map((item, index) => (
                                         <ListGroup.Item key={index}>
                                             <Row>
                                                 <Col md={1}>
-                                                    <Image src={item.image} alt={item.name} fluid rounded />
+                                                    <Image src={item.image} alt={item.name} width={100} fluid rounded />
                                                 </Col>
                                                 <Col>
                                                     {item.name}

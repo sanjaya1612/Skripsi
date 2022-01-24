@@ -1,31 +1,31 @@
 import React, { useState } from 'react'
-import { Form, Button} from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
-import CheckOutSteps from '../components/CheckOutSteps'
-import { saveBooking } from '../actions/cartActions'
+import HotelSteps from '../components/HotelSteps'
+import { saveBookingHotel } from '../actions/bookingActions'
 
-const BookingScreen = ({history}) => {
-    const cart = useSelector((state) => state.cart)
-    const { booking } = cart
+const HotelBookingScreen = ({history}) => {
+    const booking = useSelector(state => state.booking)
+    const {bookingHotel} = booking
 
-    const[fullName, setFullName] = useState(booking.fullName)
-    const[email, setEmail] = useState(booking.email)
-    const[phoneNumber, setPhoneNumber] = useState(booking.phoneNumber)
+    const [fullName, setFullName] = useState(bookingHotel.fullName)
+    const [email, setEmail] = useState(bookingHotel.email)
+    const [phoneNumber, setPhoneNumber] = useState(bookingHotel.phoneNumber)
 
     const dispatch = useDispatch()
 
-    const submitHandler = (e) =>{
+    const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(saveBooking({fullName, email, phoneNumber}))
-        history.push('/payment')
+        dispatch(saveBookingHotel({fullName, email, phoneNumber}))
+        history.push('/hotelpayment')
     }
     return (
         <FormContainer>
-            <CheckOutSteps step1 step2/>
+            <HotelSteps step1 step2/>
             <h2>Booking</h2>
             <Form onSubmit={submitHandler}>
-            <Form.Group controlId='email'>
+                <Form.Group controlId='email'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         type='text'
@@ -54,7 +54,7 @@ const BookingScreen = ({history}) => {
                         required
                         onChange={(e) => setPhoneNumber(e.target.value)}></Form.Control>
                 </Form.Group>
-                <br/>
+                <br />
                 <Button type='submit' variant='primary'>
                     Continue
                 </Button>
@@ -63,4 +63,4 @@ const BookingScreen = ({history}) => {
     )
 }
 
-export default BookingScreen
+export default HotelBookingScreen

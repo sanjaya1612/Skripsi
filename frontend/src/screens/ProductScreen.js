@@ -15,6 +15,8 @@ const ProductScreen = ({ history, match }) => {
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
     const [date, setDate] = useState("")
+    const [message, setMessage] = useState()
+
     const dispatch = useDispatch()
 
     const productDetails = useSelector(state => state.productDetails)
@@ -26,7 +28,7 @@ const ProductScreen = ({ history, match }) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const [message, setMessage] = useState()
+    
 
     useEffect(() => {
         if (successProductReview) {
@@ -40,7 +42,7 @@ const ProductScreen = ({ history, match }) => {
 
     const PaymentHandler = () => {
         if (date === "") {
-            setMessage('Date must be filled')
+            setMessage('Date must be filled') 
         } else {
             localStorage.setItem("Qty", qty)
             localStorage.setItem("Date", date)

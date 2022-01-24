@@ -73,7 +73,7 @@ const FoodOrderScreen = ({ match, history }) => {
 
     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
         <>
-            <h1>Order {order._id}</h1>
+            <h2>Order {order._id}</h2>
             <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>

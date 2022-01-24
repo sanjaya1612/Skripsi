@@ -194,3 +194,6 @@ export const createHotelReview = (hotelId, review) => async (dispatch, getState)
         })
     }
 }
+
+export const searchListings = async (query) =>
+  await axios.post(`api/search-listings`, query);
