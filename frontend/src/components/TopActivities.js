@@ -17,7 +17,7 @@ const TopActivities = () => {
     }, [dispatch])
     return (
         <>
-            <h1>Top Activities</h1>
+            <h2>Top Activities</h2>
 
             {loading ? (
                 <Loader />

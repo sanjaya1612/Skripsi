@@ -32,6 +32,7 @@ import HotelScreen from "./screens/HotelScreen";
 import HotelDetailsScreen from "./screens/HotelDetailsScreen";
 import HotelListScreen from "./screens/HotelListScreen";
 import HotelEditScreen from "./screens/HotelEditScreen";
+import HotelSearchResult from "./screens/HotelSearchResult";
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
           <Route path='/foodspage/page/:pageNumber' component={FoodScreen} />
           <Route path='search-food/:keyword/fooodspage/page/:pageNumber' component={FoodScreen}/>
           <Route path='/search-activity/:keyword' component={ActivityScreen} />
+          <Route path='/search-hotel' component={HotelSearchResult} />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>

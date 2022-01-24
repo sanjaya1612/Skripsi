@@ -49,21 +49,21 @@ const HomeScreen = () => {
                 </Carousel.Item>
             </Carousel>
                 <br />
-                <h1>What We Serve</h1>
-                <h2>Top Values For You...</h2>
+                <h2>What We Serve</h2>
+                <h3>Top Values For You...</h3>
                 <br />
                 <Row>
                     <Col xs={6} md={4}>
                         <Image src='/images/decide.svg' rounded width={200} />
-                        <h2 style={{ textAlign: 'center' }}>Lot of choices</h2>
+                        <h3 style={{ textAlign: 'center' }}>Lot of choices</h3>
                     </Col>
                     <Col xs={6} md={4}>
                         <Image src='/images/booking.svg' rounded width={200} />
-                        <h2 style={{ textAlign: 'center' }}>Easy booking</h2>
+                        <h3 style={{ textAlign: 'center' }}>Easy booking</h3>
                     </Col>
                     <Col xs={6} md={4}>
                         <Image src='/images/secure.svg' rounded width={200} />
-                        <h2 style={{ textAlign: 'center' }}>Trusted</h2>
+                        <h3 style={{ textAlign: 'center' }}>Trusted</h3>
                     </Col>
                 </Row>
                 <br />
@@ -80,8 +80,9 @@ const HomeScreen = () => {
             <br />
             <Row>
 
-                <h1>Let's Explore The Beauty of Indonesia</h1>
+                <h2>Let's Explore The Beauty of Indonesia</h2>
                 <Col>
+                    <br/>
                     <VideoJS />
                     <br/>
                 </Col>

@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Hotel from '../components/Hotel'
+import HotelSearch from '../components/HotelSearch'
 
 const HotelScreen = () => {
     const dispatch = useDispatch()
@@ -17,7 +18,11 @@ const HotelScreen = () => {
     },[dispatch])
     return (
         <>
-            <h1>Sample Hotels</h1>
+            <h2>Hotels <i class="fas fa-hotel"></i></h2>
+            <div className='col'>
+                <br/>
+                <HotelSearch />
+            </div>
 
             {loading ? (
                 <Loader />

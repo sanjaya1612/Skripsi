@@ -24,7 +24,8 @@ const FoodScreen = ({match}) => {
 
     return (
         <>
-            <h1>Foods <i class="fas fa-utensils"></i></h1>
+            <h2>Foods <i class="fas fa-utensils"></i></h2>
+            <br/>
             <Route render={({ history }) => <SearchBox history={history}/>}/>
 
             {loading ? (

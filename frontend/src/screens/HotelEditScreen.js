@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AlgoliaPlaces from 'algolia-places-react'
-import { DatePicker } from 'antd'
-import moment from 'moment'
+
 import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,10 +25,11 @@ const HotelEditScreen = ({ match, history }) => {
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
     const [star, setStar] = useState(0)
-    const [location, setLocation] = useState('')
+    const [location, setLocation] = useState([])
     const [from, setFrom] = useState('')
     const [to, setTo] = useState('')
     const [bed, setBed] = useState('')
+    var loc = ""
 
 
     const dispatch = useDispatch()
@@ -84,6 +84,7 @@ const HotelEditScreen = ({ match, history }) => {
     // }
 
     const submitHandler = (e) => {
+        console.log(location)
         e.preventDefault()
         dispatch(updateHotel({
             _id: hotelId,
@@ -157,7 +158,7 @@ const HotelEditScreen = ({ match, history }) => {
                                 placeholder='Location'
                                 defaultValue={location}
                                 options={config}
-                                onChange={({ suggestion }) => setLocation({ ...location, location: suggestion.value })}
+                                onChange={({ suggestion }) => setLocation(suggestion.value)}
                                 style={{ height: "50px" }}
                             />
                         </Form.Group>
@@ -178,7 +179,6 @@ const HotelEditScreen = ({ match, history }) => {
                                     placeholder='Enter date'
                                     value={from}
                                     onChange={(e) => setFrom(e.target.value)}
-                                    disabledDate={(current) => current && current.valueOf() < moment().subtract(1, 'days')}
                                     ></Form.Control>
                             </Form.Group>
 

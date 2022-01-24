@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import { login } from '../actions/userActions'
 
 
+
 const LoginScreen = ({ location, history }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -43,7 +44,8 @@ const LoginScreen = ({ location, history }) => {
                                     type='email'
                                     placeholder='Enter Email'
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)}></Form.Control>
+                                    onChange={(e) => setEmail(e.target.value)}>
+                                </Form.Control>
                             </Form.Group>
 
                             <Form.Group controlId='password'>

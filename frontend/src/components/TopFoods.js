@@ -17,7 +17,7 @@ const TopFoods = () => {
     }, [dispatch])
     return (
         <>
-            <h1>Top Foods</h1>
+            <h2>Top Foods</h2>
 
             {loading ? (
                 <Loader />
