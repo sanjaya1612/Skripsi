@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import NumberFormat from 'react-number-format'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Button, Form } from 'react-bootstrap'
@@ -28,8 +29,6 @@ const ProductScreen = ({ history, match }) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    
-
     useEffect(() => {
         if (successProductReview) {
             alert('Review Submitted!')
@@ -42,7 +41,7 @@ const ProductScreen = ({ history, match }) => {
 
     const PaymentHandler = () => {
         if (date === "") {
-            setMessage('Date must be filled') 
+            setMessage('Date must be filled')
         } else {
             localStorage.setItem("Qty", qty)
             localStorage.setItem("Date", date)
@@ -80,7 +79,12 @@ const ProductScreen = ({ history, match }) => {
                                     <Rating value={product.rating} text={`${product.numReviews} reviews`} />
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Price : Rp.{product.price}
+                                    Price : <NumberFormat
+                                        value={product.price}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} />
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     <strong>Description : </strong>
@@ -102,7 +106,12 @@ const ProductScreen = ({ history, match }) => {
                                     <Row>
                                         <Col>Price : </Col>
                                         <Col>
-                                            <strong>Rp.{product.price}</strong>
+                                            <NumberFormat
+                                                value={product.price}
+                                                displayType={'text'}
+                                                thousandSeparator={"."}
+                                                decimalSeparator=","
+                                                prefix={'Rp.'} />
                                         </Col>
                                     </Row>
                                 </ListGroup.Item>

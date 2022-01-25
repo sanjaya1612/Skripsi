@@ -7,6 +7,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listFoodDetails, createFoodReview } from '../actions/foodActions'
 import { FOOD_CREATE_REVIEW_RESET } from '../constants/foodConstants'
+import NumberFormat from 'react-number-format'
 
 
 const FoodDetailsScreen = ({ history, match }) => {
@@ -69,7 +70,12 @@ const FoodDetailsScreen = ({ history, match }) => {
                                     <Rating value={food.rating} text={`${food.numReviews} reviews`} />
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Price : Rp.{food.price}
+                                    Price : <NumberFormat
+                                        value={food.price}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} />
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     Details : {food.details}
@@ -85,7 +91,12 @@ const FoodDetailsScreen = ({ history, match }) => {
                                     <Row>
                                         <Col>Price : </Col>
                                         <Col>
-                                            <strong>Rp.{food.price}</strong>
+                                            <strong><NumberFormat
+                                        value={food.price}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></strong>
                                         </Col>
                                     </Row>
                                 </ListGroup.Item>

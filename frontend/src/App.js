@@ -32,9 +32,9 @@ import HotelScreen from "./screens/HotelScreen";
 import HotelDetailsScreen from "./screens/HotelDetailsScreen";
 import HotelListScreen from "./screens/HotelListScreen";
 import HotelEditScreen from "./screens/HotelEditScreen";
-import HotelSearchResult from "./screens/HotelSearchResult";
 import HotelBookingScreen from "./screens/HotelBookingScreen";
 import HotelPaymentScreen from "./screens/HotelPaymentScreen";
+import HotelPlaceOrderScreen from "./screens/HotelPlaceOrderScreen";
 import ScrollToTop from "./components/ScrollToTop";
 
 
@@ -53,6 +53,7 @@ function App() {
           <Route path='/foodpayment' component={FoodPaymentScreen} />
           <Route path='/booking' component={BookingScreen} />
           <Route path='/hotelbooking' component={HotelBookingScreen} />
+          <Route path='/hotelplaceorder' component={HotelPlaceOrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/activityplaceorder' component={ActivityPlaceOrderScreen} />
           <Route path='/foodplaceorder' component={FoodPlaceOrderScreen} />
@@ -80,7 +81,6 @@ function App() {
           <Route path='/foodspage/page/:pageNumber' component={FoodScreen} />
           <Route path='search-food/:keyword/fooodspage/page/:pageNumber' component={FoodScreen}/>
           <Route path='/search-activity/:keyword' component={ActivityScreen} />
-          <Route path='/search-hotel' component={HotelSearchResult} />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>

@@ -48,6 +48,10 @@ import {
 } from './reducers/orderFoodReducers'
 
 import {
+    bookingCreateReducer,
+} from './reducers/bookingHotelReducers'
+
+import {
     orderCreateReducer,
     orderDetailsReducer,
     orderPayReducer,
@@ -89,6 +93,7 @@ const reducer = combineReducers({
     userUpdate: userUpdateReducer,
     orderFoodCreate: orderFoodCreateReducer,
     orderCreate: orderCreateReducer,
+    bookingCreate: bookingCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
     orderFoodDetails: orderFoodDetailsReducer,

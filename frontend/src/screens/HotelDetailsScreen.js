@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import NumberFormat from 'react-number-format'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Button, Form } from 'react-bootstrap'
-import { DateRangePicker } from 'rsuite';
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -15,7 +15,8 @@ import { HOTEL_CREATE_REVIEW_RESET } from '../constants/hotelConstants'
 const HotelDetailsScreen = ({ history, match }) => {
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
-    const [date, setDate] = useState('')
+    const [from, setFrom] = useState('')
+    const [to, setTo] = useState('')
     const [message, setMessage] = useState()
 
     const dispatch = useDispatch()
@@ -40,10 +41,11 @@ const HotelDetailsScreen = ({ history, match }) => {
     }, [dispatch, match, successHotelReview])
 
     const bookingHandler = () => {
-        if (date === "") {
+        if (from === "" && to === "") {
             setMessage('Date must be filled')
         }else{
-            localStorage.setItem("Date", date)
+            localStorage.setItem("From", from)
+            localStorage.setItem("To", to)
             localStorage.setItem("PImage", hotel.image)
             localStorage.setItem("PId", hotel._id)
             history.push(`/login?redirect=hotelbooking/${match.params.id}`)
@@ -63,6 +65,7 @@ const HotelDetailsScreen = ({ history, match }) => {
             <Link className='btn btn-dark my-3' to='/hotels'>
                 Back
             </Link>
+            {message && <Message variant='danger'>{message}</Message>}
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
                 <>
                 <Row>
@@ -81,7 +84,12 @@ const HotelDetailsScreen = ({ history, match }) => {
                                 <Rating value={hotel.rating} text={`${hotel.numReviews} reviews`} />
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                Price : Rp.{hotel.price}
+                                Price : <NumberFormat
+                                        value={hotel.price}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} />
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 Bed : {hotel.bed}
@@ -98,7 +106,12 @@ const HotelDetailsScreen = ({ history, match }) => {
                                 <Row>
                                     <Col>Price : </Col>
                                     <Col>
-                                        <strong>Rp.{hotel.price}</strong>
+                                        <strong><NumberFormat
+                                        value={hotel.price}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></strong>
                                     </Col>
                                 </Row>
                             </ListGroup.Item>
@@ -114,8 +127,13 @@ const HotelDetailsScreen = ({ history, match }) => {
                             </ListGroup.Item>
                             <ListGroup.Item>
                                     <Row>
-                                        <Col>Select date : </Col>
-                                        <DateRangePicker size="lg" onChange={(dateString) => setDate(dateString)} className='w-100'/>
+                                        <Col>From : </Col>
+                                        <Col><input type="date" onChange={(e) => setFrom(e.target.value)}></input></Col>  
+                                    </Row>
+                                    <br/>   
+                                    <Row>
+                                        <Col>To : </Col>
+                                        <Col><input type="date" onChange={(e) => setTo(e.target.value)}></input></Col>
                                     </Row>
                                 </ListGroup.Item>
                             <ListGroup>

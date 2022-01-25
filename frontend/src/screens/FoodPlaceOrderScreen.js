@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import FoodSteps from '../components/FoodSteps'
 import Message from '../components/Message'
 import { createFoodOrder } from '../actions/oderFoodActions'
+import NumberFormat from 'react-number-format'
 
 
 const FoodPlaceOrderScreen = ({ history }) => {
@@ -92,25 +93,45 @@ const FoodPlaceOrderScreen = ({ history }) => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Items</Col>
-                                    <Col>Rp.{cart.itemsPrice}</Col>
+                                    <Col><NumberFormat
+                                        value={cart.itemsPrice}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Shipping</Col>
-                                    <Col>Rp.{cart.shippingPrice}</Col>
+                                    <Col><NumberFormat
+                                        value={cart.shippingPrice}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col>Rp.{cart.taxPrice}</Col>
+                                    <Col><NumberFormat
+                                        value={cart.taxPrice}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total Price</Col>
-                                    <Col>Rp.{cart.totalPrice}</Col>
+                                    <Col><NumberFormat
+                                        value={cart.totalPrice}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                         </ListGroup>

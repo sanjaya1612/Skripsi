@@ -1,108 +1,104 @@
 import React, { useEffect, useState } from 'react'
+import NumberFormat from 'react-number-format'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import CheckOutSteps from '../components/CheckOutSteps'
-import { listProductDetails } from '../actions/productActions'
-import { createOrder } from '../actions/orderActions'
-import NumberFormat from 'react-number-format'
+import HotelSteps from '../components/HotelSteps'
+import { diffDays, listHotelDetails } from '../actions/hotelActions'
+import { createBooking } from '../actions/bookingHotelAction'
 
-const ActivityPlaceOrderScreen = ({ history }) => {
+
+const HotelPlaceOrderScreen = ({ history }) => {
     const dispatch = useDispatch()
-    const productDetails = useSelector(state => state.productDetails)
-    const { product } = productDetails
-    const booking = useSelector((state) => state.cart.booking)
-    const cart = useSelector((state) => state.cart)
+
+    const booking = useSelector(state => state.booking)
+    const hotelDetails = useSelector(state => state.hotelDetails)
+    const { hotel } = hotelDetails
 
     //calculation
-    booking.itemPrice = Number(localStorage.Qty * product.price)
-    booking.taxPrice = Number((0.10 * booking.itemPrice))
-    booking.totalPrice = Number((localStorage.Qty * product.price) + booking.taxPrice)
+    booking.itemPrice = Number(diffDays(localStorage.getItem("From"), localStorage.getItem("To")) * hotel.price)
+    booking.taxPrice = Number((0.01 * booking.itemPrice))
+    booking.totalPrice = Number(booking.itemPrice) + Number(booking.taxPrice)
 
+    useEffect(() => {
+        dispatch(listHotelDetails(localStorage.getItem("PId")))
+    }, [dispatch])
 
-    const orderCreate = useSelector(state => state.orderCreate)
-    const { order, success } = orderCreate
+    const bookingCreate = useSelector(state => state.bookingCreate)
+    const { order, success} = bookingCreate
 
-    
-
-     useEffect(() => {
-         if (success) {
-             history.push(`/order/${order._id}`)
-         }
-         //eslint-disable-next-line
+    useEffect(() => {
+        if(success) {
+            history.push(`/bookings/${order._id}`)
+        }
+        // eslint-disable-next-line
     }, [history, success])
 
-    const activityPlaceOrderHandler = () => {
-        dispatch(createOrder({
-            orderItems: product.name,
-            qty: localStorage.Qty,
-            date: localStorage.getItem("Date"), 
-            phoneNumber: booking.phoneNumber,
-            fullName: booking.fullName,
-            paymentMethod: cart.paymentMethod,
+    const hotelPlaceOrderHandler = () => {
+        dispatch(createBooking({
+            bookingItems: hotel.title,
+            from: localStorage.getItem("From"),
+            to: localStorage.getItem("To"),
+            durations: diffDays(localStorage.getItem("From"), localStorage.getItem("To")),
+            fullName: booking.bookingHotel.fullName,
+            email: booking.bookingHotel.email,
+            phoneNumber: booking.bookingHotel.phoneNumber,
+            paymentMethod: booking.paymentMethod,
             itemPrice: booking.itemPrice,
             taxPrice: booking.taxPrice,
             totalPrice: booking.totalPrice,
         }))
-
     }
-    useEffect(() => {
-        dispatch(listProductDetails(localStorage.getItem("PId")))
-    }, [dispatch])
-
-
     return (
         <>
-            <CheckOutSteps step1 step2 step3 step4 />
+            <HotelSteps step1 step2 step3 step4 />
             <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h3>Booking</h3>
+                            <h3>Booking Details</h3>
                             <p>
-                                <strong>Name: </strong>
-                                {booking.fullName}
+                                <strong>Name : </strong>
+                                {booking.bookingHotel.fullName}
                             </p>
                             <p>
                                 <strong>E-mail: </strong>
-                                {booking.email}
+                                {booking.bookingHotel.email}
                             </p>
                             <p>
                                 <strong>Phone number: </strong>
-                                {booking.phoneNumber}
+                                {booking.bookingHotel.phoneNumber}
                             </p>
                             <p>
-                                <strong>Date: </strong>
-                                {localStorage.getItem("Date")}
+                                <strong>From : </strong>
+                                {localStorage.getItem("From")}
+                            </p>
+                            <p>
+                                <strong>To : </strong>
+                                {localStorage.getItem("To")}
+                            </p>
+                            <p>
+                                <strong>Durations : </strong>
+                                {diffDays(localStorage.getItem("From"), localStorage.getItem("To"))} {diffDays(localStorage.getItem("From"), localStorage.getItem("To")) <= 1 ? ' day' : ' days'}
                             </p>
                         </ListGroup.Item>
 
                         <ListGroup.Item>
                             <h3>Payment Method</h3>
                             <strong>Method: </strong>
-                            {cart.paymentMethod}
+                            {booking.paymentMethod}
                         </ListGroup.Item>
 
                         <ListGroup.Item>
                             <h3>Order Details</h3>
                             <Row>
                                 <Col md={2}>
-                                    <Image src={product.image} alt={""} width={100} rounded />
+                                    <Image src={hotel.image} alt={""} width={100} rounded />
                                 </Col>
                                 <Col>
-                                    {product.name}
+                                    {hotel.title}
                                 </Col>
                                 <Col md={5}>
-                                    {localStorage.Qty} x <NumberFormat
-                                        value={product.price}
-                                        displayType={'text'}
-                                        thousandSeparator={"."}
-                                        decimalSeparator=","
-                                        prefix={'Rp.'} /> = <NumberFormat
-                                        value={localStorage.Qty * product.price}
-                                        displayType={'text'}
-                                        thousandSeparator={"."}
-                                        decimalSeparator=","
-                                        prefix={'Rp.'} />
+                                    {diffDays(localStorage.getItem("From"), localStorage.getItem("To"))} x Rp.{hotel.price} = Rp.{diffDays(localStorage.getItem("From"), localStorage.getItem("To")) * hotel.price}
                                 </Col>
                             </Row>
                         </ListGroup.Item>
@@ -118,12 +114,11 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                                 <Row>
                                     <Col>Items</Col>
                                     <Col><NumberFormat
-                                        value={localStorage.Qty * product.price}
+                                        value={booking.itemPrice}
                                         displayType={'text'}
                                         thousandSeparator={"."}
                                         decimalSeparator=","
-                                        prefix={'Rp. '} />
-                                    </Col>
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
@@ -134,7 +129,7 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                                         displayType={'text'}
                                         thousandSeparator={"."}
                                         decimalSeparator=","
-                                        prefix={'Rp. '} /></Col>
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
@@ -145,7 +140,7 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                                         displayType={'text'}
                                         thousandSeparator={"."}
                                         decimalSeparator=","
-                                        prefix={'Rp. '} /></Col>
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                         </ListGroup>
@@ -154,7 +149,7 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                     <Button
                         type='button'
                         className='w-100'
-                        onClick={activityPlaceOrderHandler}
+                        onClick={hotelPlaceOrderHandler}
                     >Place Order</Button>
                 </Col>
             </Row>
@@ -162,4 +157,4 @@ const ActivityPlaceOrderScreen = ({ history }) => {
     )
 }
 
-export default ActivityPlaceOrderScreen
+export default HotelPlaceOrderScreen

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card, ListGroupItem } from 'react-bootstrap'
 import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
+import NumberFormat from 'react-number-format'
 
 
 const CartScreen = ({ match, location, history }) => {
@@ -48,7 +49,12 @@ const CartScreen = ({ match, location, history }) => {
                                         <Col md={3}>
                                             <Link to={`/food/${item.food}`}>{item.name}</Link>
                                         </Col>
-                                        <Col md={2}>Rp.{item.price}</Col>
+                                        <Col md={2}><NumberFormat
+                                        value={item.price}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></Col>
                                         <Col md={2}>
                                             <Form.Control
                                                 as='Select'
@@ -76,7 +82,13 @@ const CartScreen = ({ match, location, history }) => {
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                             {/* <h2>Subtotal ({cartItems.reduce((acc , item)=> acc + item.qty,total = item.qty + 0)}) items</h2> */}
-                           <h2>Total Price</h2> Rp.{cartItems.reduce((acc, item) => acc + item.qty * item.price,0)}
+                           
+                           <h2>Total Price</h2><NumberFormat
+                                        value={cartItems.reduce((acc, item) => acc + item.qty * item.price,0)}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} />
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>

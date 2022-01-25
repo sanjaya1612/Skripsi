@@ -18,7 +18,7 @@ const HotelScreen = () => {
     },[dispatch])
     return (
         <>
-            <h2>Hotels <i class="fas fa-hotel"></i></h2>
+            <h1>Hotels <i class="fas fa-hotel"></i></h1>
             <div className='col'>
                 <br/>
                 <HotelSearch />
