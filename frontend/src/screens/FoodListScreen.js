@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import { listFoods, deleteFood, createFood } from '../actions/foodActions'
 import { FOOD_CREATE_RESET } from '../constants/foodConstants'
+import NumberFormat from 'react-number-format'
 
 const FoodListScreen = ({history, match}) => {
 const pageNumber = match.params.pageNumber || 1
@@ -87,7 +88,12 @@ const pageNumber = match.params.pageNumber || 1
                                 <tr key={food._id}>
                                     <td>{food._id}</td>
                                     <td>{food.name}</td>
-                                    <td>Rp.{food.price}</td>
+                                    <td><NumberFormat
+                                        value={food.price}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp. '} /></td>
                                     <td>
                                         {food.province}
                                     </td>

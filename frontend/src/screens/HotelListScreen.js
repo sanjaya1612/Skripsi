@@ -6,6 +6,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listHotels, deleteHotel, createHotel} from '../actions/hotelActions'
 import { HOTEL_CREATE_RESET } from '../constants/hotelConstants'
+import NumberFormat from 'react-number-format'
 
 const HotelListScreen = ({ history, match }) => {
     const dispatch = useDispatch()
@@ -85,7 +86,12 @@ const HotelListScreen = ({ history, match }) => {
                                 <tr key={hotel._id}>
                                     <td>{hotel._id}</td>
                                     <td>{hotel.title}</td>
-                                    <td>Rp.{hotel.price}</td>
+                                    <td><NumberFormat
+                                        value={hotel.price}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp. '} /></td>
                                     <td>
                                         {hotel.location}
                                     </td>

@@ -8,6 +8,7 @@ import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyFoodOrders } from '../actions/oderFoodActions'
 
 
+
 const ProfileScreen = ({ history }) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -147,12 +148,6 @@ const ProfileScreen = ({ history }) => {
                     </Table>
                 )}
             </Col>
-            <Row>
-            <Col md={3}></Col>
-                <Col>
-                    <h2>My Activity Orders</h2>
-                </Col>
-            </Row>
         </>
     </Row>
 }

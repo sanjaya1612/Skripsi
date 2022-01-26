@@ -1,6 +1,6 @@
 import mongoose from 'mongoose' 
 
-const orderSchema = mongoose.Schema({ 
+const bookingSchema = mongoose.Schema({ 
     user: {
         type: mongoose.Schema.Types.ObjectId, 
         required: true,
@@ -39,7 +39,7 @@ const orderSchema = mongoose.Schema({
         required: true,
     },
     paymentResult: {
-        id: { type: String },
+        id: { type: String }, 
         status: { type: String },
         update_time: { type: String },
         email_address: { type: String }
@@ -68,6 +68,6 @@ const orderSchema = mongoose.Schema({
     timestamps: true
 })
 
-const Booking = mongoose.model('Booking',orderSchema)
+const Booking = mongoose.model('Booking',bookingSchema)
 
 export default Booking

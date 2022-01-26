@@ -35,6 +35,7 @@ import HotelEditScreen from "./screens/HotelEditScreen";
 import HotelBookingScreen from "./screens/HotelBookingScreen";
 import HotelPaymentScreen from "./screens/HotelPaymentScreen";
 import HotelPlaceOrderScreen from "./screens/HotelPlaceOrderScreen";
+import HotelOrderScreen from "./screens/HotelOrderScreen";
 import ScrollToTop from "./components/ScrollToTop";
 
 
@@ -47,6 +48,7 @@ function App() {
         <Container>
           <Route path='/foodorders/:id' component={FoodOrderScreen} />
           <Route path='/order/:id' component={OrderScreen} />
+          <Route path='/hotelorder/:id' component={HotelOrderScreen} />
           <Route path='/FAQ' component={FaqScreen} />
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/hotelpayment' component={HotelPaymentScreen} />

@@ -6,6 +6,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listProducts, deleteProduct, createProduct} from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+import NumberFormat from 'react-number-format'
 
 const ActivityListScreen = ({history, match}) => {
     const dispatch = useDispatch()
@@ -85,7 +86,12 @@ const ActivityListScreen = ({history, match}) => {
                                 <tr key={product._id}>
                                     <td>{product._id}</td>
                                     <td>{product.name}</td>
-                                    <td>Rp.{product.price}</td>
+                                    <td><NumberFormat
+                                        value={product.price}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp. '} /></td>
                                     <td>
                                         {product.destination}
                                     </td>

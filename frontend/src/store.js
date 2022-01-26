@@ -49,6 +49,8 @@ import {
 
 import {
     bookingCreateReducer,
+    bookingDetailsReducer,
+    bookingPayReducer,
 } from './reducers/bookingHotelReducers'
 
 import {
@@ -93,8 +95,10 @@ const reducer = combineReducers({
     userUpdate: userUpdateReducer,
     orderFoodCreate: orderFoodCreateReducer,
     orderCreate: orderCreateReducer,
-    bookingCreate: bookingCreateReducer,
     orderDetails: orderDetailsReducer,
+    bookingCreate: bookingCreateReducer,
+    bookingDetails: bookingDetailsReducer,
+    bookingPay: bookingPayReducer,
     orderPay: orderPayReducer,
     orderFoodDetails: orderFoodDetailsReducer,
     orderFoodPay: orderFoodPayReducer,

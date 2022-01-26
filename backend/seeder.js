@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import hotels from './data/hotel.js'
+import gallery from './data/gallery.js'
 import users from './data/users.js'
-import Hotel from './models/hotelModel.js'
+import Gallery from './models/galleryModel.js'
 import User from './models/userModel.js'
 import connectDB from './config/db.js'
 
@@ -12,15 +12,15 @@ connectDB()
 
 const importData = async () => {
     try {
-        await Hotel.deleteMany()
+        await Gallery.deleteMany()
 
         const createdUsers = await User.insertMany(users)
         const adminUser = createdUsers[0]._id
-        const sampleHotels = hotels.map(hotel => {
-            return { ...hotel, user: adminUser }
+        const sampleGalleries = gallery.map(gallery => {
+            return { ...gallery, user: adminUser }
         })
 
-        await Hotel.insertMany(sampleHotels)
+        await Gallery.insertMany(sampleGalleries)
 
         console.log('Data Imported')
         process.exit()

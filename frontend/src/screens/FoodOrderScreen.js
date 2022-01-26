@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { getOrderFoodDetails, payFoodOrder, deliverFoodOrder } from '../actions/oderFoodActions'
 import { ORDER_FOOD_PAY_RESET, ORDER_FOOD_DELIVER_RESET } from '../constants/foodOrderConstants'
+import NumberFormat from 'react-number-format'
 
 
 const FoodOrderScreen = ({ match, history }) => {
@@ -112,7 +113,18 @@ const FoodOrderScreen = ({ match, history }) => {
                                                     {item.name}
                                                 </Col>
                                                 <Col md={4}>
-                                                    {item.qty} x Rp.{item.price} = Rp.{item.qty * item.price}
+                                                    {item.qty} x <NumberFormat
+                                                        value={item.price}
+                                                        displayType={'text'}
+                                                        thousandSeparator={"."}
+                                                        decimalSeparator=","
+                                                        prefix={'Rp.'} /> = <NumberFormat
+                                                        value={item.qty * item.price}
+                                                        displayType={'text'}
+                                                        thousandSeparator={"."}
+                                                        decimalSeparator=","
+                                                        prefix={'Rp.'} />
+
                                                 </Col>
                                             </Row>
                                         </ListGroup.Item>
@@ -131,25 +143,45 @@ const FoodOrderScreen = ({ match, history }) => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Items</Col>
-                                    <Col>Rp.{order.itemsPrice}</Col>
+                                    <Col><NumberFormat
+                                        value={order.itemsPrice}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Shipping</Col>
-                                    <Col>Rp.{order.shippingPrice}</Col>
+                                    <Col><NumberFormat
+                                        value={order.shippingPrice}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col>Rp.{order.taxPrice}</Col>
+                                    <Col><NumberFormat
+                                        value={order.taxPrice}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total Price</Col>
-                                    <Col>Rp.{order.totalPrice}</Col>
+                                    <Col><NumberFormat
+                                        value={order.totalPrice}
+                                        displayType={'text'}
+                                        thousandSeparator={"."}
+                                        decimalSeparator=","
+                                        prefix={'Rp.'} /></Col>
                                 </Row>
                             </ListGroup.Item>
                             {!order.isPaid && (

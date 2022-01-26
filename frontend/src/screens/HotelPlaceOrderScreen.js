@@ -28,7 +28,7 @@ const HotelPlaceOrderScreen = ({ history }) => {
 
     useEffect(() => {
         if(success) {
-            history.push(`/bookings/${order._id}`)
+            history.push(`/hotelorder/${order._id}`)
         }
         // eslint-disable-next-line
     }, [history, success])
