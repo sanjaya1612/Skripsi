@@ -27,7 +27,15 @@ const gallerySchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
+    image1: {
+      type: String,
+      required: true,
+    },
+    image2: {
+      type: String,
+      required: true,
+    },
+    image3: {
       type: String,
       required: true,
     },

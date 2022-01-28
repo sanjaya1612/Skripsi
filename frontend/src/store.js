@@ -68,7 +68,10 @@ import {
 import {
     galleryListReducer,
     galleryDetailsReducer,
-    galleryReviewCreateReducer
+    galleryReviewCreateReducer,
+    galleryDeleteReducer,
+    galleryCreateReducer,
+    galleryUpdateReducer
 } from './reducers/galleryReducers'
 
 const reducer = combineReducers({
@@ -118,6 +121,9 @@ const reducer = combineReducers({
     galleryList: galleryListReducer,
     galleryDetails: galleryDetailsReducer,
     galleryReviewCreate: galleryReviewCreateReducer,
+    galleryDelete: galleryDeleteReducer,
+    galleryCreate: galleryCreateReducer,
+    galleryUpdate: galleryUpdateReducer, 
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

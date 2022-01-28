@@ -69,7 +69,7 @@ const GalleryDetailsScreen = ({ history, match }) => {
                                     <img
                                         className="d-block w-100 rounded"
                                         style={{ height: 500 }}
-                                        src={gallery.image}
+                                        src={gallery.image2}
                                         alt="Second slide"
                                     />
 
@@ -79,7 +79,7 @@ const GalleryDetailsScreen = ({ history, match }) => {
                                     <img
                                         className="d-block w-100 rounded"
                                         style={{ height: 500 }}
-                                        src={gallery.image}
+                                        src={gallery.image3}
                                         alt="Third slide"
                                     />
 

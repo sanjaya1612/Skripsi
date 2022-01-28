@@ -42,6 +42,8 @@ import MyActivitiesScreen from "./screens/MyActivitiesScreen";
 import MyHotelBookingsScreen from "./screens/MyHotelBookingsScreen";
 import GalleryScreen from "./screens/GalleryScreen";
 import GalleryDetailsScreen from "./screens/GalleryDetailsScreen";
+import GalleryListScreen from "./screens/GalleryListScreen";
+import GalleryEditScreen from "./screens/GalleryEditScreen";
 import BaliScreen from "./screens/BaliScreen";
 
 
@@ -85,6 +87,8 @@ function App() {
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />
           <Route path='/admin/hotellist' component={HotelListScreen} />
           <Route path='/admin/hotel/:id/edit' component={HotelEditScreen} />
+          <Route path='/admin/gallerylist' component={GalleryListScreen} />
+          <Route path='/admin/gallery/:id/edit' component={GalleryEditScreen} />
           <Route path='/admin/foodlist' component={FoodListScreen} exact/>
           <Route path='/admin/foodlist/:pageNumber' component={FoodListScreen} exact/>
           <Route path='/admin/food/:id/edit' component={FoodEditScreen} />

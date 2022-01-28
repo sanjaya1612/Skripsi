@@ -5,17 +5,17 @@ import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
-import Loader from '../components/Loader'
+import Loader from '../components/Loader' 
 import FormContainer from '../components/FormContainer'
 import { listHotelDetails, updateHotel } from '../actions/hotelActions'
 import { HOTEL_UPDATE_RESET } from '../constants/hotelConstants'
 
-const config = {
-    appId: process.env.REACT_APP_ALGOLIA_APP_ID,
-    apiKey: process.env.REACT_APP_ALGOLIA_API_KEY,
-    language: "en",
-    countries: ["id"],
-}
+// const config = {
+//     appId: process.env.REACT_APP_ALGOLIA_APP_ID,
+//     apiKey: process.env.REACT_APP_ALGOLIA_API_KEY,
+//     language: "en",
+//     countries: ["id"],
+// }
 
 const HotelEditScreen = ({ match, history }) => {
     const hotelId = match.params.id
@@ -29,7 +29,6 @@ const HotelEditScreen = ({ match, history }) => {
     const [from, setFrom] = useState('')
     const [to, setTo] = useState('')
     const [bed, setBed] = useState('')
-    var loc = ""
 
 
     const dispatch = useDispatch()
