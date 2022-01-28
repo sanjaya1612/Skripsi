@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import { Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listHotels } from '../actions/hotelActions'
 import { Row, Col } from 'react-bootstrap'
@@ -7,22 +8,22 @@ import Loader from '../components/Loader'
 import Hotel from '../components/Hotel'
 import HotelSearch from '../components/HotelSearch'
 
-const HotelScreen = () => {
+const HotelScreen = ({match}) => {
+    const keyword = match.params.keyword
     const dispatch = useDispatch()
 
     const hotelList = useSelector(state => state.hotelList)
     const {loading, error, hotels} = hotelList
 
     useEffect(() => {
-        dispatch(listHotels())
-    },[dispatch])
+        dispatch(listHotels(keyword))
+    },[dispatch, keyword])
     return (
         <>
             <h1>Hotels <i className="fas fa-hotel"></i></h1>
-            <div className='col'>
-                <br/>
-                <HotelSearch />
-            </div>
+            <br/>
+            <Route render={({ history }) => <HotelSearch history={history}/>}/>
+                 
 
             {loading ? (
                 <Loader />

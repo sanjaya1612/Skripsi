@@ -4,7 +4,7 @@ import OrderFood from '../models/orderFoodModel.js'
 const addFoodItems = asyncHandler(async (req, res) => {
     const {
         orderItems,
-        shippingAddress,
+        shippingAddress, 
         paymentMethod,
         itemsPrice,
         taxPrice,

@@ -37,6 +37,12 @@ import HotelPaymentScreen from "./screens/HotelPaymentScreen";
 import HotelPlaceOrderScreen from "./screens/HotelPlaceOrderScreen";
 import HotelOrderScreen from "./screens/HotelOrderScreen";
 import ScrollToTop from "./components/ScrollToTop";
+import MyFoodOrdersScreen from "./screens/MyFoodOrdersScreen";
+import MyActivitiesScreen from "./screens/MyActivitiesScreen";
+import MyHotelBookingsScreen from "./screens/MyHotelBookingsScreen";
+import GalleryScreen from "./screens/GalleryScreen";
+import GalleryDetailsScreen from "./screens/GalleryDetailsScreen";
+import BaliScreen from "./screens/BaliScreen";
 
 
 function App() {
@@ -50,6 +56,7 @@ function App() {
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/hotelorder/:id' component={HotelOrderScreen} />
           <Route path='/FAQ' component={FaqScreen} />
+          <Route path='/bali' component={BaliScreen} />
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/hotelpayment' component={HotelPaymentScreen} />
           <Route path='/foodpayment' component={FoodPaymentScreen} />
@@ -65,7 +72,12 @@ function App() {
           <Route path='/foods' component={FoodScreen}/>
           <Route path='/activities' component={ActivityScreen}/>
           <Route path='/hotels' component={HotelScreen}/>
+          <Route path='/galleries' component={GalleryScreen}/>
+          <Route path='/myfoodorders' component={MyFoodOrdersScreen}/>
+          <Route path='/myactivities' component={MyActivitiesScreen}/>
+          <Route path='/myhotelbooking' component={MyHotelBookingsScreen}/>
           <Route path='/product/:id' component={ProductScreen} />
+          <Route path='/gallery/:id' component={GalleryDetailsScreen} />
           <Route path='/food/:id' component={FoodDetailsScreen} />
           <Route path='/hotel/:id' component={HotelDetailsScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
@@ -83,6 +95,7 @@ function App() {
           <Route path='/foodspage/page/:pageNumber' component={FoodScreen} />
           <Route path='search-food/:keyword/fooodspage/page/:pageNumber' component={FoodScreen}/>
           <Route path='/search-activity/:keyword' component={ActivityScreen} />
+          <Route path='/search-hotel/:keyword' component={HotelScreen} />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>

@@ -51,17 +51,25 @@ import {
     bookingCreateReducer,
     bookingDetailsReducer,
     bookingPayReducer,
+    bookingListMyReducer
 } from './reducers/bookingHotelReducers'
 
 import {
     orderCreateReducer,
     orderDetailsReducer,
     orderPayReducer,
+    orderListMyReducer
 } from './reducers/orderReducers'
 
 import {
     bookingReducer,
 } from './reducers/bookingReducers'
+
+import {
+    galleryListReducer,
+    galleryDetailsReducer,
+    galleryReviewCreateReducer
+} from './reducers/galleryReducers'
 
 const reducer = combineReducers({
     productList: productListReducer,
@@ -99,12 +107,17 @@ const reducer = combineReducers({
     bookingCreate: bookingCreateReducer,
     bookingDetails: bookingDetailsReducer,
     bookingPay: bookingPayReducer,
+    bookingListMy: bookingListMyReducer,
     orderPay: orderPayReducer,
+    orderListMy: orderListMyReducer,
     orderFoodDetails: orderFoodDetailsReducer,
     orderFoodPay: orderFoodPayReducer,
     orderFoodDeliver: orderFoodDeliverReducer,
     orderListMyFood: orderListMyFoodReducer,
     orderListFood: orderListFoodReducer,
+    galleryList: galleryListReducer,
+    galleryDetails: galleryDetailsReducer,
+    galleryReviewCreate: galleryReviewCreateReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

@@ -75,4 +75,9 @@ const updateBookingToPaid = asyncHandler(async (req, res) => {
     }
 })
 
-export {addBookingItems, getBookingById, updateBookingToPaid}
+const getMyBookings = asyncHandler(async (req, res) => {
+    const orders = await Booking.find({ user: req.user._id})
+    res.json(orders)
+})
+
+export {addBookingItems, getBookingById, updateBookingToPaid, getMyBookings}

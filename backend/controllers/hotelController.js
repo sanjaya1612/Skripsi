@@ -3,7 +3,13 @@ import Hotel from '../models/hotelModel.js'
 
 
 const getHotels = asyncHandler (async (req, res) => {
-    const hotels = await Hotel.find({})
+    const keyword = req.query.keyword ? {
+        location: {
+            $regex: req.query.keyword,
+            $options: 'i'
+        }
+    } : {}
+    const hotels = await Hotel.find({ ...keyword })
 
     res.json(hotels)
 }) 

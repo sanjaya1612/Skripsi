@@ -8,7 +8,10 @@ import {
     BOOKING_DETAILS_REQUEST,
     BOOKING_PAY_REQUEST,
     BOOKING_PAY_SUCCESS,
-    BOOKING_PAY_FAIL, 
+    BOOKING_PAY_FAIL,
+    BOOKING_LIST_MY_FAIL,
+    BOOKING_LIST_MY_SUCCESS,
+    BOOKING_LIST_MY_REQUEST, 
 } from '../constants/bookingHotelConstants'
 
 export const createBooking = (order) => async (dispatch, getState) => {
@@ -100,6 +103,37 @@ export const payBooking = (bookingId, paymentResult) => async (dispatch, getStat
     } catch (error) {
         dispatch({
             type: BOOKING_PAY_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+export const listMyBookings = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: BOOKING_LIST_MY_REQUEST,
+        })
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`,
+            }
+        }
+
+        const { data } = await axios.get(
+            `/api/bookings/mybookings`, config
+        )
+        dispatch({
+            type: BOOKING_LIST_MY_SUCCESS,
+            payload: data,
+        })
+    } catch (error) {
+        dispatch({
+            type: BOOKING_LIST_MY_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import AlgoliaPlaces from 'algolia-places-react'
+// import AlgoliaPlaces from 'algolia-places-react'
 
 import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
@@ -141,16 +141,16 @@ const HotelEditScreen = ({ match, history }) => {
                             {uploading && <Loader />} */}
                         </Form.Group>
 
-                        {/* <Form.Group controlId='location'>
+                        <Form.Group controlId='location'>
                             <Form.Label>Location</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Enter location'
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}></Form.Control>
-                        </Form.Group> */}
+                        </Form.Group>
 
-                        <Form.Group controlId='location'>
+                        {/* <Form.Group controlId='location'>
                             <Form.Label>Location</Form.Label>
                             <AlgoliaPlaces
                                 className='form-control ml-2 mr-2'
@@ -161,7 +161,7 @@ const HotelEditScreen = ({ match, history }) => {
                                 onChange={({ suggestion }) => setLocation(suggestion.value)}
                                 style={{ height: "50px" }}
                             />
-                        </Form.Group>
+                        </Form.Group> */}
 
                         <Form.Group controlId='star'>
                             <Form.Label>star</Form.Label>

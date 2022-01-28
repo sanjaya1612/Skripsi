@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Product from '../models/productModel.js'
-import { protect, admin } from "../middleware/authMiddleware.js";
+
 
 const getProducts = asyncHandler(async (req, res) => {
     const keyword = req.query.keyword ? {

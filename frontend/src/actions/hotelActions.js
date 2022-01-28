@@ -20,10 +20,10 @@ import {
     HOTEL_UPDATE_SUCCESS
 } from '../constants/hotelConstants'
 
-export const listHotels = () => async (dispatch) => {
+export const listHotels = (keyword = '') => async (dispatch) => {
     try {
         dispatch({ type: HOTEL_LIST_REQUEST })
-        const { data } = await axios.get('/api/hotels')
+        const { data } = await axios.get(`/api/hotels?keyword=${keyword}`)
 
         dispatch({
             type: HOTEL_LIST_SUCCESS,

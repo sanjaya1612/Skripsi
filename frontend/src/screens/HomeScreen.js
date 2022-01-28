@@ -17,8 +17,7 @@ const HomeScreen = () => {
                         alt="First slide"
                     />
                     <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <>Nulla vitae elit libero, a pharetra augue mollis interdum.</>
+                        <>“Life is either a daring adventure or nothing at all” ~ Helen Keller</>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -30,8 +29,7 @@ const HomeScreen = () => {
                     />
 
                     <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</>
+                        <>“Take only memories, leave only footprints” ~ Chief Seattle</>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -43,8 +41,8 @@ const HomeScreen = () => {
                     />
 
                     <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</>
+                        {/* <h3>Third slide label</h3> */}
+                        <>” The real voyage of discovery consists not in seeking new landscapes, but in having new eyes.” ~ Marcel Proust</>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
