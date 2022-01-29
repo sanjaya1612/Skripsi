@@ -97,8 +97,9 @@ function App() {
           <Route path='/admin/activity/:id/edit' component={ActivityEditScreen} />
           <Route path='/search-food/:keyword' component={FoodScreen} />
           <Route path='/foodspage/page/:pageNumber' component={FoodScreen} />
-          <Route path='search-food/:keyword/fooodspage/page/:pageNumber' component={FoodScreen}/>
+          <Route path='search-food/:keyword/foodspage/page/:pageNumber' component={FoodScreen}/>
           <Route path='/search-activity/:keyword' component={ActivityScreen} />
+          <Route path='/activitypage/page/:pageNumber' component={ActivityScreen} />
           <Route path='/search-hotel/:keyword' component={HotelScreen} />
           <Route path='/search-gallery/:keyword' component={GalleryScreen} />
           <Route path='/' component={HomeScreen} exact />

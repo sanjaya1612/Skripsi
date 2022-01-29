@@ -204,7 +204,7 @@ const ProductScreen = ({ history, match }) => {
                     </Row>
                 </>
             )}
-        </>
+        </> 
     )
 }
 

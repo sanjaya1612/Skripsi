@@ -43,6 +43,9 @@ const GalleryDetailsScreen = ({ history, match }) => {
             rating,
             comment
         }))
+        setTimeout(function () {
+            window.location.reload()
+        }, 3000);
     }
 
     return (
