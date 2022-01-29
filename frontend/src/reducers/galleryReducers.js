@@ -16,6 +16,9 @@ import {
     GALLERY_LIST_FAIL,
     GALLERY_LIST_REQUEST, 
     GALLERY_LIST_SUCCESS,
+    GALLERY_TOP_FAIL,
+    GALLERY_TOP_REQUEST,
+    GALLERY_TOP_SUCCESS,
     GALLERY_UPDATE_FAIL,
     GALLERY_UPDATE_REQUEST,
     GALLERY_UPDATE_RESET,
@@ -102,6 +105,19 @@ export const galleryUpdateReducer = (state = { gallery: {} }, action) => {
             return { loading: false, error: action.payload }
         case GALLERY_UPDATE_RESET:
             return { gallery: {} } 
+        default:
+            return state
+    }
+}
+
+export const galleryTopRatedReducer = (state = { galleries: [] }, action) => {
+    switch (action.type) {
+        case GALLERY_TOP_REQUEST:
+            return { loading: true, galleries:[] }
+        case GALLERY_TOP_SUCCESS:
+            return { loading: false, galleries: action.payload }
+        case GALLERY_TOP_FAIL:
+            return { loading: false, error: action.payload }
         default:
             return state
     }

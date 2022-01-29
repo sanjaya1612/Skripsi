@@ -15,15 +15,18 @@ import {
     GALLERY_LIST_FAIL,
     GALLERY_LIST_REQUEST, 
     GALLERY_LIST_SUCCESS,
+    GALLERY_TOP_FAIL,
+    GALLERY_TOP_REQUEST,
+    GALLERY_TOP_SUCCESS,
     GALLERY_UPDATE_FAIL,
     GALLERY_UPDATE_REQUEST,
     GALLERY_UPDATE_SUCCESS, 
 } from '../constants/galleryConstants'
 
-export const listGalleries = () => async (dispatch) => {
+export const listGalleries = (keyword = '') => async (dispatch) => {
     try {
         dispatch({ type: GALLERY_LIST_REQUEST })
-        const { data } = await axios.get('/api/galleries')
+        const { data } = await axios.get(`/api/galleries?keyword=${keyword}`)
 
         dispatch({
             type: GALLERY_LIST_SUCCESS,
@@ -179,6 +182,26 @@ export const updateGallery = (gallery) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: GALLERY_UPDATE_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+export const listTopGalleries = () => async (dispatch) => {
+    try {
+        dispatch({ type: GALLERY_TOP_REQUEST })
+        const { data } = await axios.get('/api/galleries/topgallery')
+
+        dispatch({
+            type: GALLERY_TOP_SUCCESS,
+            payload: data, 
+        })
+    } catch (error) {
+        dispatch({
+            type: GALLERY_TOP_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

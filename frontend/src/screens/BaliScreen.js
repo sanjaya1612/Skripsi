@@ -1,24 +1,31 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 
 const BaliScreen = () => {
   return <>
+  <Link to = '/galleries'><i className="fas fa-arrow-left"></i></Link>
   <h1><span className='text-primary'>About</span> Bali</h1>
-  {/* <Image src='./images/balimap.jpg' rounded/> */}
+  
+  <Image className='center' src='./images/profilebali.jpg' rounded style={{width:900,height:500}}/>
+  
+  
   <p>
-    Bali adalah sebuah provinsi di Indonesia yang ibu kotanya bernama Denpasar. 
-  Bali juga merupakan salah satu pulau di Kepulauan Nusa Tenggara. 
-  Di awal kemerdekaan Indonesia, pulau ini termasuk dalam Provinsi Sunda Kecil yang beribu kota di Singaraja, dan kini terbagi menjadi 3 provinsi, yakni Bali, Nusa Tenggara Barat, dan Nusa Tenggara Timur. 
-  Pada tahun 2020, penduduk provinsi Bali berjumlah 4.317.404 jiwa, dengan kepadatan 747 jiwa/km2.
+  <br/>
+  Bali is a province in Indonesia whose capital city is Denpasar.
+   Bali is also one of the islands in the Nusa Tenggara Archipelago.
+   At the beginning of Indonesia's independence, this island was included in the Lesser Sunda Province with Singaraja as its capital, and is now divided into 3 provinces, namely Bali, West Nusa Tenggara and East Nusa Tenggara.
+   In 2020, the population of Bali province is 4,317,404 people, with a density of 747 people/km2.
   </p>
 
   <h3>Religion</h3>
-  <p>Berdasarkan data Badan Pusat Statistik (BPS) provinsi Bali tahun 2021, penduduk Bali berjumlah 4.317.404 jiwa (2020) dengan mayoritas etnis Bali. Data Kementerian Agama mencatat bahwa 86,91% warga provinsi Bali menganut agama Hindu. Agama lainnya adalah Islam (10,05%), Kristen Protestan (1,56%), Katolik (0,79%), Budha (0,68%), Konghucu (0,01%), dan Kepercayaan (kurang dari 0,01%).</p>
-  <p>Masyarakat suku Bali umumnya beragama Hindu. Sementara penduduk Jawa, Sunda, Sasak, Melayu, umumnya beragama Islam, dan beberapa orang asli suku Bali juga ada yang memeluk agama Islam.[12] Sementara pemeluk agama Kristen umumnya berasal dari penduduk Nusa Tenggara Timur, kemudian Papua, suku Batak, Minahasa, Tionghoa. Dan ada juga satu desa yakni desa Blimbing Sari di kecamatan Melaya Jembrana, tidak jauh dari Pelabuhan Gilimanuk, sebuah desa Kristen dimana warganya adalah asli suku Bali, bahkan gerejanya bentuknya mirip Pura.</p>
-
+  <p>Based on data from the Central Statistics Agency (BPS) for the province of Bali in 2021, the population of Bali is 4,317,404 people (2020) with the majority being ethnic Balinese. Data from the Ministry of Religion records that 86.91% of the people of the province of Bali adhere to Hinduism. Other religions are Islam (10.05%), Protestant Christianity (1.56%), Catholic (0.79%), Buddhism (0.68%), Confucianism (0.01%), and Belief (less than 0.01%).</p>
+  <p>The Balinese people are generally Hindu. While the inhabitants of Java, Sunda, Sasak, Malay, are generally Muslim, and some indigenous Balinese people also embrace Islam. While Christians generally come from residents of East Nusa Tenggara, then Papua, Batak tribes, Minahasa, Chinese. And there is also one village, namely Blimbing Sari village in the Melaya Jembrana sub-district, not far from Gilimanuk Harbor, a Christian village where the residents are Balinese, even the church looks like a temple.</p>
+  <Image className='center' src='./images/balipeople.jpg' rounded style={{width:900,height:500}}/>
+  <br/>
 <h3>People</h3>
-<p>Mayoritas penduduk yang mendiami provinsi Bali adalah suku asli setempat, yakni Bali. Suku Bali memiliki kekayaan budaya yang dikenal dunia, sehingga Bali menjadi tujuan utama wisatawan asing ke Indonesia. Selain kekayaan pantai, budaya yang diminati di Bali adalah tari-tariannya, seperti tari Kecak, festival seperti Ogoh-ogoh, dan lainnya. Suku terbanyak dari luar suku Bali adalah suku Jawa.</p>
+<p>The majority of the population inhabiting the province of Bali is the local indigenous tribe, namely Bali. The Balinese have a rich culture that is known to the world, so that Bali is the main destination for foreign tourists to Indonesia. In addition to the richness of the beach, the culture of interest in Bali is its dances, such as the Kecak dance, festivals such as Ogoh-ogoh, and others. Most ethnic groups from outside the Balinese are Javanese.</p>
   </>;
 };
 

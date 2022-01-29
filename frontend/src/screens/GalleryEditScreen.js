@@ -14,9 +14,7 @@ const GalleryEditScreen = ({ match, history }) => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
-    const [image1, setImage1] = useState('')
-    const [image2, setImage2] = useState('')
-    const [image3, setImage3] = useState('')
+    const [image, setImage] = useState('')
 
 
     const dispatch = useDispatch()
@@ -36,9 +34,7 @@ const GalleryEditScreen = ({ match, history }) => {
                 dispatch(listGalleryDetails(galleryId))
             } else {
                 setName(gallery.name)
-                setImage1(gallery.image1)
-                setImage2(gallery.image2)
-                setImage3(gallery.image3)
+                setImage(gallery.image)
                 setLocation(gallery.location)
                 setDescription(gallery.description)
             }
@@ -52,9 +48,7 @@ const GalleryEditScreen = ({ match, history }) => {
             _id: galleryId,
             name,
             description,
-            image1,
-            image2,
-            image3,
+            image,
             location,
         }))
     }
@@ -77,30 +71,15 @@ const GalleryEditScreen = ({ match, history }) => {
                                 onChange={(e) => setName(e.target.value)}></Form.Control>
                         </Form.Group>
 
-                        
-
-                        <Form.Group controlId='image1'>
+                        <Form.Group controlId='image'>
                             <Form.Label>Image</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Enter image url'
-                                value={image1}
-                                onChange={(e) => setImage1(e.target.value)}>
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}>
                             </Form.Control>
 
-                            <Form.Control
-                                type='text'
-                                placeholder='Enter image url'
-                                value={image2}
-                                onChange={(e) => setImage2(e.target.value)}>
-                            </Form.Control>
-
-                            <Form.Control
-                                type='text'
-                                placeholder='Enter image url'
-                                value={image3}
-                                onChange={(e) => setImage3(e.target.value)}>
-                            </Form.Control>
                             {/* <Form.File
                                 id='image-file'
                                 custom onChange={uploadFileHandler}>

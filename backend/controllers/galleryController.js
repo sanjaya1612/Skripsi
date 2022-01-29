@@ -2,7 +2,13 @@ import asyncHandler from 'express-async-handler'
 import Gallery from '../models/galleryModel.js'
 
 const getGalleries = asyncHandler (async (req, res) => {
-    const galleries = await Gallery.find({})
+    const keyword = req.query.keyword ? {
+        location: {
+            $regex: req.query.keyword,
+            $options: 'i'
+        }
+    } : {}
+    const galleries = await Gallery.find({ ...keyword })
 
     res.json(galleries)
 }) 
@@ -65,9 +71,7 @@ const updateGallery = asyncHandler(async (req, res) => {
     
     const {
         name,  
-        image1, 
-        image2, 
-        image3, 
+        image, 
         location, 
         description, 
     } = req.body
@@ -76,9 +80,7 @@ const updateGallery = asyncHandler(async (req, res) => {
 
     if(gallery) {
         gallery.name = name
-        gallery.image1 = image1
-        gallery.image2 = image2
-        gallery.image3 = image3
+        gallery.image = image
         gallery.location = location
         gallery.description = description
         
@@ -95,9 +97,7 @@ const createGallery = asyncHandler(async (req, res) => {
     const gallery = new Gallery({
         name: 'Sample Name',
         user: req.user._id,
-        image1: '/images/sample.png',
-        image2: '/images/sample.png',
-        image3: '/images/sample.png',
+        image: '/images/sample.png',
         location: 'Sample City, Sample Province, Indonesia',
         numReviews: 0,
         description: 'Sample description',
@@ -107,4 +107,18 @@ const createGallery = asyncHandler(async (req, res) => {
     res.status(201).json(createdGallery)
 })
 
-export {getGalleries, getGalleryById, createGalleryReview, deleteGallery, updateGallery, createGallery}
+const getTopGallery = asyncHandler(async (req, res) => {
+    const galleries = await Gallery.find({}).sort({ rating: -1 }).limit(3)
+
+    res.json(galleries)
+})
+
+export {
+    getGalleries, 
+    getGalleryById, 
+    createGalleryReview, 
+    deleteGallery, 
+    updateGallery, 
+    createGallery,
+    getTopGallery
+}

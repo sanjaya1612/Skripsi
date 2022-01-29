@@ -71,7 +71,8 @@ import {
     galleryReviewCreateReducer,
     galleryDeleteReducer,
     galleryCreateReducer,
-    galleryUpdateReducer
+    galleryUpdateReducer,
+    galleryTopRatedReducer
 } from './reducers/galleryReducers'
 
 const reducer = combineReducers({
@@ -124,6 +125,7 @@ const reducer = combineReducers({
     galleryDelete: galleryDeleteReducer,
     galleryCreate: galleryCreateReducer,
     galleryUpdate: galleryUpdateReducer, 
+    galleryTopRated: galleryTopRatedReducer
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

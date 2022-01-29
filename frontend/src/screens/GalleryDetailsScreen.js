@@ -55,38 +55,7 @@ const GalleryDetailsScreen = ({ history, match }) => {
                 <>
                     <Row>
                         <Col >
-                            <Carousel>
-                                <Carousel.Item>
-                                    <img
-                                        className="d-block w-100 rounded"
-                                        style={{ height: 500 }}
-                                        src={gallery.image}
-                                        alt="First slide"
-                                    />
-
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <img
-                                        className="d-block w-100 rounded"
-                                        style={{ height: 500 }}
-                                        src={gallery.image2}
-                                        alt="Second slide"
-                                    />
-
-
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <img
-                                        className="d-block w-100 rounded"
-                                        style={{ height: 500 }}
-                                        src={gallery.image3}
-                                        alt="Third slide"
-                                    />
-
-
-                                </Carousel.Item>
-                            </Carousel>
-                            {/* <Image className='gallery-image' src={gallery.image} alt={gallery.name} /> */}
+                            <Image className='gallery-image' src={gallery.image} alt={gallery.name} />
                             <ListGroup variant='flush'>
                                 <ListGroup.Item>
                                     <Row>

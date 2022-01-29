@@ -100,6 +100,7 @@ function App() {
           <Route path='search-food/:keyword/fooodspage/page/:pageNumber' component={FoodScreen}/>
           <Route path='/search-activity/:keyword' component={ActivityScreen} />
           <Route path='/search-hotel/:keyword' component={HotelScreen} />
+          <Route path='/search-gallery/:keyword' component={GalleryScreen} />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>
