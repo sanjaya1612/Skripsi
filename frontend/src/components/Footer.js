@@ -18,7 +18,7 @@ const Footer = () => {
                         <ul className='list-unstyled'>
                             <li><a href="/FAQ">FAQ</a></li>
                             <li><a href="https://paxel.co/id/layanan-kami" target={"_blank"}>shipping</a></li>
-                            <li><a href="#">COVID-19 Info</a></li>
+                            <li><a href="/covidinfo">COVID-19 Info</a></li>
                             <li><a href="https://www.paypal.com/id/business?kid=p32154139722" target={"_blank"}>payment options</a></li>
                         </ul>
                     </div>

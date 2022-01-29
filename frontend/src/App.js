@@ -45,6 +45,10 @@ import GalleryDetailsScreen from "./screens/GalleryDetailsScreen";
 import GalleryListScreen from "./screens/GalleryListScreen";
 import GalleryEditScreen from "./screens/GalleryEditScreen";
 import BaliScreen from "./screens/BaliScreen";
+import SulawesiScreen from "./screens/SulawesiScreen";
+import PapuaScreen from "./screens/PapuaScreen";
+import NttScreen from "./screens/NttScreen";
+import CovidScreen from "./screens/CovidScreen"
 
 
 function App() {
@@ -59,6 +63,9 @@ function App() {
           <Route path='/hotelorder/:id' component={HotelOrderScreen} />
           <Route path='/FAQ' component={FaqScreen} />
           <Route path='/bali' component={BaliScreen} />
+          <Route path='/papua' component={PapuaScreen} />
+          <Route path='/ntt' component={NttScreen} />
+          <Route path='/sulawesi' component={SulawesiScreen} />
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/hotelpayment' component={HotelPaymentScreen} />
           <Route path='/foodpayment' component={FoodPaymentScreen} />
@@ -75,6 +82,7 @@ function App() {
           <Route path='/activities' component={ActivityScreen}/>
           <Route path='/hotels' component={HotelScreen}/>
           <Route path='/galleries' component={GalleryScreen}/>
+          <Route path='/covidinfo' component={CovidScreen}/>
           <Route path='/myfoodorders' component={MyFoodOrdersScreen}/>
           <Route path='/myactivities' component={MyActivitiesScreen}/>
           <Route path='/myhotelbooking' component={MyHotelBookingsScreen}/>

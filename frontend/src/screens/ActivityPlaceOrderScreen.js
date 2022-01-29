@@ -79,7 +79,7 @@ const ActivityPlaceOrderScreen = ({ history }) => {
                         <ListGroup.Item>
                             <h3>Payment Method</h3>
                             <strong>Method: </strong>
-                            {cart.paymentMethod}
+                            {localStorage.getItem("paymentMethod")}
                         </ListGroup.Item>
 
                         <ListGroup.Item>

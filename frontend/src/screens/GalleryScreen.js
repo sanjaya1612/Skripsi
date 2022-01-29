@@ -23,7 +23,8 @@ const GalleryScreen = ({match}) => {
   }, [dispatch])
   return (
     <>
-    {!keyword && <TopCarousel /> && <DestinationChoice />}
+    {!keyword && <TopCarousel />} 
+    {!keyword && <DestinationChoice />}
       <h1>Gallery <i className="far fa-images"></i></h1>
       <br />
       <Route render={({ history }) => <GallerySearch history={history} />} />
