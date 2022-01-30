@@ -48,6 +48,7 @@ import BaliScreen from "./screens/BaliScreen";
 import SulawesiScreen from "./screens/SulawesiScreen";
 import PapuaScreen from "./screens/PapuaScreen";
 import NttScreen from "./screens/NttScreen";
+import AllGalleryScreen from "./screens/AllGalleryScreen";
 import CovidScreen from "./screens/CovidScreen"
 
 
@@ -66,6 +67,7 @@ function App() {
           <Route path='/papua' component={PapuaScreen} />
           <Route path='/ntt' component={NttScreen} />
           <Route path='/sulawesi' component={SulawesiScreen} />
+          <Route path='/allgallery' component={AllGalleryScreen} />
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/hotelpayment' component={HotelPaymentScreen} />
           <Route path='/foodpayment' component={FoodPaymentScreen} />
@@ -109,7 +111,7 @@ function App() {
           <Route path='/search-activity/:keyword' component={ActivityScreen} />
           <Route path='/activitypage/page/:pageNumber' component={ActivityScreen} />
           <Route path='/search-hotel/:keyword' component={HotelScreen} />
-          <Route path='/search-gallery/:keyword' component={GalleryScreen} />
+          <Route path='/search-allgallery/:keyword' component={AllGalleryScreen} />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>

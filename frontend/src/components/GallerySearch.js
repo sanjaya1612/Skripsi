@@ -6,22 +6,30 @@ const GallerySearch = ({ history }) => {
     const submitHandler = (e) => {
         e.preventDefault()
         if (keyword.trim()) {
-            history.push(`/search-gallery/${keyword}`)
+            history.push(`/search-allgallery/${keyword}`)
         } else {
-            history.push('/gallery')
+            history.push('/allgallery')
         }
     }
 
     return (
         <Form onSubmit={submitHandler} inline>
-            <Form.Control
-                type='text'
-                name='q'
-                onChange={(e) => setKeyword(e.target.value)}
-                placeholder='Search by location'
-                className='gsbox'>
-            </Form.Control>
-            <Button type='submit' variant='outline-success'><i className="fas fa-search"></i></Button>
+            <Row>
+                <Col>
+                    <Form.Control
+                        type='text'
+                        name='q'
+                        onChange={(e) => setKeyword(e.target.value)}
+                        placeholder='Search by location'
+                        className='sbox'>
+                    </Form.Control>
+                </Col>
+
+            <Col>
+                <Button type='submit' variant='outline-success' className='cari'><i className="fas fa-search"></i></Button>
+                {/* <Button type='submit' variant='outline-success' className='cari'><i className="fas fa-search"></i></Button> */}
+            </Col>
+            </Row>
         </Form>
     )
 };
