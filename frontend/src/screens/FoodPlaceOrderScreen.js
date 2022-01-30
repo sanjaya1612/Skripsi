@@ -58,8 +58,7 @@ const FoodPlaceOrderScreen = ({ history }) => {
                         <ListGroup.Item>
                             <h3>Payment Method</h3>
                             <strong>Method: </strong>
-                            {localStorage.getItem('paymentMethod')}
-                            {/* {cart.paymentMethod} */}
+                            {cart.paymentMethod}
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h3>Order Items</h3>

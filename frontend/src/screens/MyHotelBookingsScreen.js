@@ -63,7 +63,7 @@ const MyHotelBookingsScreen = ({history}) => {
                                         )}
                                     </td>
                                     <td>
-                                        <LinkContainer to={`/order/${order._id}`}>
+                                        <LinkContainer to={`/hotelorder/${order._id}`}>
                                             <Button variant='dark'>Details</Button>
                                         </LinkContainer>
                                     </td>

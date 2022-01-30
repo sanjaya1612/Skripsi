@@ -17,11 +17,11 @@ const Hotel = ({ hotel }) => {
                 <Card.Text as='div'>
                     <Rating value={hotel.rating} text={`${hotel.numReviews} reviews`} />
                 </Card.Text>
-                <Card.Text as='div'>
+                {/* <Card.Text as='div'>
                     <span className='text-primary'>
                         for {diffDays(hotel.from, hotel.to)} {diffDays(hotel.from, hotel.to) <= 1 ? ' day' : ' days'}
                     </span>
-                </Card.Text>
+                </Card.Text> */}
                 {/* <Card.Text as='div'>
                     {`${hotel.description.substring(0,50)}...`}
                 </Card.Text> */}
