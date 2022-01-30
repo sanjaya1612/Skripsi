@@ -23,7 +23,7 @@ const DestinationChoice = () => {
         <Col sm={12} md={6} lg={4} xl={3}> 
           <Card className='mb-3' style={{ width: '17rem' }}>
             <Link to={'/papua'}>
-              <Card.Img src='images/papua.jpg' width={110} height={145} />
+              <Card.Img src='images/Papua.jpg' width={110} height={145} />
             </Link>
           </Card>
         </Col>
