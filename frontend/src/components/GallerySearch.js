@@ -26,7 +26,7 @@ const GallerySearch = ({ history }) => {
                 </Col>
 
             <Col>
-                <Button type='submit' variant='outline-success' className='cari'><i className="fas fa-search"></i></Button>
+                <Button type='submit' variant='outline-success' className='carigallery'><i className="fas fa-search"></i></Button>
                 {/* <Button type='submit' variant='outline-success' className='cari'><i className="fas fa-search"></i></Button> */}
             </Col>
             </Row>

@@ -27,7 +27,7 @@ const Header = (history) => {
                                 <Nav.Link> Food</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to='/galleries'>
-                                <Nav.Link> Galerry</Nav.Link>
+                                <Nav.Link> Gallery</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to='/hotels'>
                                 <Nav.Link> Hotels</Nav.Link>
