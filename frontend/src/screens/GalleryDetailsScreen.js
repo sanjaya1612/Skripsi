@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, ListGroup, Button, Form, Carousel } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button, Form } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -10,7 +10,7 @@ import { GALLERY_CREATE_REVIEW_RESET } from '../constants/galleryConstants'
 
 
 
-const GalleryDetailsScreen = ({ history, match }) => {
+const GalleryDetailsScreen = ({ match }) => {
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
     const [message, setMessage] = useState()

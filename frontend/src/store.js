@@ -51,14 +51,16 @@ import {
     bookingCreateReducer,
     bookingDetailsReducer,
     bookingPayReducer,
-    bookingListMyReducer
+    bookingListMyReducer,
+    bookingListReducer
 } from './reducers/bookingHotelReducers'
 
 import {
     orderCreateReducer,
     orderDetailsReducer,
     orderPayReducer,
-    orderListMyReducer
+    orderListMyReducer,
+    orderListReducer
 } from './reducers/orderReducers'
 
 import {
@@ -112,8 +114,10 @@ const reducer = combineReducers({
     bookingDetails: bookingDetailsReducer,
     bookingPay: bookingPayReducer,
     bookingListMy: bookingListMyReducer,
+    bookingList: bookingListReducer,
     orderPay: orderPayReducer,
     orderListMy: orderListMyReducer,
+    orderList: orderListReducer,
     orderFoodDetails: orderFoodDetailsReducer,
     orderFoodPay: orderFoodPayReducer,
     orderFoodDeliver: orderFoodDeliverReducer,

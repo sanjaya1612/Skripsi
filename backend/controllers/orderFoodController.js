@@ -89,7 +89,14 @@ const getMyFoods = asyncHandler(async (req, res) => {
 })
 
 const getFoods = asyncHandler(async (req, res) => {
-    const orders = await OrderFood.find({}).populate('user', 'id name')
+    const keydate = req.query.keydate ? {
+        fullName: {
+            $regex: req.query.keydate,
+            $options: 'i'
+        }
+    } : {}
+    const orders = await OrderFood.find({ ...keydate }).populate('user', 'id name')
     res.json(orders)
+    console.log(keydate)
 })
 export { addFoodItems, getFoodById, updateFoodToPaid, getMyFoods, getFoods, updateFoodTodelivered}

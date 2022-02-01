@@ -80,4 +80,9 @@ const getMyBookings = asyncHandler(async (req, res) => {
     res.json(orders)
 })
 
-export {addBookingItems, getBookingById, updateBookingToPaid, getMyBookings}
+const getBookings = asyncHandler(async (req, res) => {
+    const orders = await Booking.find({}).populate('user', 'id name') 
+    res.json(orders)
+})
+
+export {addBookingItems, getBookingById, updateBookingToPaid, getMyBookings, getBookings}

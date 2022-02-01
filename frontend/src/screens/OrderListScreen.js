@@ -5,17 +5,18 @@ import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listFoodOrders } from '../actions/oderFoodActions'
-import DateFoodFilter from '../components/DateFoodFilter'
+import { listOrders } from '../actions/orderActions'
 import NumberFormat from 'react-number-format'
+import ActivityDateFilter from '../components/ActivityDateFilter'
 
-const OrderFoodListScreen = ({ history, match }) => {
+const OrderListScreen = ({ history, match }) => {
     const keydate = match.params.keydate
+
     const dispatch = useDispatch()
 
 
-    const orderListFood = useSelector(state => state.orderListFood)
-    const { loading, error, orders } = orderListFood
+    const orderList = useSelector(state => state.orderList)
+    const { loading, error, orders } = orderList
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -23,8 +24,7 @@ const OrderFoodListScreen = ({ history, match }) => {
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            dispatch(listFoodOrders(keydate))
-            console.log(keydate)
+            dispatch(listOrders(keydate))
         } else {
             history.push('/login')
         }
@@ -34,8 +34,8 @@ const OrderFoodListScreen = ({ history, match }) => {
     return (
         <>
 
-            <h1>Food Orders</h1>
-            <Route render={({ history }) => <DateFoodFilter history={history} />} />
+            <h1>Activity Orders</h1>
+            <Route render={({ history }) => <ActivityDateFilter history={history}/>}/>
             <br/>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
                 : (
@@ -48,7 +48,6 @@ const OrderFoodListScreen = ({ history, match }) => {
                                 <th>Date</th>
                                 <th>Total Price</th>
                                 <th>Paid</th>
-                                <th>Delivered</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -72,14 +71,7 @@ const OrderFoodListScreen = ({ history, match }) => {
                                         )}
                                     </td>
                                     <td>
-                                        {order.isDelivered ? (
-                                            order.deliveredAt.substring(0, 10)
-                                        ) : (
-                                            <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                        )}
-                                    </td>
-                                    <td>
-                                        <LinkContainer to={`/foodorders/${order._id}`}>
+                                        <LinkContainer to={`/order/${order._id}`}>
                                             <Button variant='dark' className='btn-sm'>
                                                 Details
                                             </Button>
@@ -95,4 +87,4 @@ const OrderFoodListScreen = ({ history, match }) => {
     )
 }
 
-export default OrderFoodListScreen
+export default OrderListScreen

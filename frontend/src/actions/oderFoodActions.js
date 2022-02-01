@@ -179,7 +179,7 @@ export const listMyFoodOrders = () => async (dispatch, getState) => {
     }
 }
 
-export const listFoodOrders = () => async (dispatch, getState) => {
+export const listFoodOrders = (keydate = []) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ORDER_FOOD_LIST_REQUEST,
@@ -193,8 +193,9 @@ export const listFoodOrders = () => async (dispatch, getState) => {
         }
 
         const { data } = await axios.get(
-            `/api/orderfoods`, config
+            `/api/orderfoods?keydate=${keydate}`, config
         )
+        console.log(keydate)
         dispatch({
             type: ORDER_FOOD_LIST_SUCCESS,
             payload: data,

@@ -5,17 +5,17 @@ import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listFoodOrders } from '../actions/oderFoodActions'
-import DateFoodFilter from '../components/DateFoodFilter'
+import { listBookings } from '../actions/bookingHotelAction'
 import NumberFormat from 'react-number-format'
 
-const OrderFoodListScreen = ({ history, match }) => {
-    const keydate = match.params.keydate
+const BookingListScreen = ({ history, match }) => {
+    // const keydate = match.params.keydate
+
     const dispatch = useDispatch()
 
 
-    const orderListFood = useSelector(state => state.orderListFood)
-    const { loading, error, orders } = orderListFood
+    const bookingList = useSelector(state => state.bookingList)
+    const { loading, error, orders } = bookingList
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -23,19 +23,18 @@ const OrderFoodListScreen = ({ history, match }) => {
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            dispatch(listFoodOrders(keydate))
-            console.log(keydate)
+            dispatch(listBookings())
         } else {
             history.push('/login')
         }
-    }, [dispatch, history, userInfo, keydate])
+    }, [dispatch, history, userInfo ])
 
     
     return (
         <>
 
-            <h1>Food Orders</h1>
-            <Route render={({ history }) => <DateFoodFilter history={history} />} />
+            <h1>Hotel Booking List</h1>
+            {/* <Route render={({ history }) => <ActivityDateFilter history={history}/>}/> */}
             <br/>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
                 : (
@@ -47,8 +46,7 @@ const OrderFoodListScreen = ({ history, match }) => {
                                 <th>User</th>
                                 <th>Date</th>
                                 <th>Total Price</th>
-                                <th>Paid</th>
-                                <th>Delivered</th>
+                                {/* <th>Paid</th> */}
                                 <th></th>
                             </tr>
                         </thead>
@@ -64,22 +62,15 @@ const OrderFoodListScreen = ({ history, match }) => {
                                         thousandSeparator={"."}
                                         decimalSeparator=","
                                         prefix={'Rp.'} /></td>
-                                    <td>
+                                    {/* <td>
                                         {order.isPaid ? (
-                                            order.paidAt.substring(0, 10)
+                                            order.paidAt
                                         ) : (
                                             <i className='fas fa-times' style={{ color: 'red' }}></i>
                                         )}
-                                    </td>
+                                    </td> */}
                                     <td>
-                                        {order.isDelivered ? (
-                                            order.deliveredAt.substring(0, 10)
-                                        ) : (
-                                            <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                        )}
-                                    </td>
-                                    <td>
-                                        <LinkContainer to={`/foodorders/${order._id}`}>
+                                        <LinkContainer to={`/hotelorder/${order._id}`}>
                                             <Button variant='dark' className='btn-sm'>
                                                 Details
                                             </Button>
@@ -95,4 +86,4 @@ const OrderFoodListScreen = ({ history, match }) => {
     )
 }
 
-export default OrderFoodListScreen
+export default BookingListScreen

@@ -50,6 +50,8 @@ import PapuaScreen from "./screens/PapuaScreen";
 import NttScreen from "./screens/NttScreen";
 import AllGalleryScreen from "./screens/AllGalleryScreen";
 import CovidScreen from "./screens/CovidScreen"
+import OrderListScreen from "./screens/OrderListScreen";
+import BookingListScreen from "./screens/BookingListScreen";
 
 
 function App() {
@@ -104,6 +106,8 @@ function App() {
           <Route path='/admin/food/:id/edit' component={FoodEditScreen} />
           <Route path='/admin/activitylist' component={ActivityListScreen} />
           <Route path='/admin/foodorderlist' component={OrderFoodListScreen} />
+          <Route path='/admin/activityorderlist' component={OrderListScreen} />
+          <Route path='/admin/hotelbookinglist' component={BookingListScreen} />
           <Route path='/admin/activity/:id/edit' component={ActivityEditScreen} />
           <Route path='/search-food/:keyword' component={FoodScreen} />
           <Route path='/foodspage/page/:pageNumber' component={FoodScreen} />
@@ -112,6 +116,8 @@ function App() {
           <Route path='/activitypage/page/:pageNumber' component={ActivityScreen} />
           <Route path='/search-hotel/:keyword' component={HotelScreen} />
           <Route path='/search-allgallery/:keyword' component={AllGalleryScreen} />
+          <Route path='/datefilter/:keydate' component={OrderFoodListScreen} />
+          <Route path='/activityfilter/:keydate' component={OrderListScreen} />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>
