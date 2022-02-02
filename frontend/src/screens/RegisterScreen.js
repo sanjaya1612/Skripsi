@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col} from 'react-bootstrap'
+import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userActions'
 
-const RegisterScreen = ({ location,history }) => {
+const RegisterScreen = ({ location, history }) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -17,28 +17,35 @@ const RegisterScreen = ({ location,history }) => {
     const dispatch = useDispatch()
 
     const userRegister = useSelector((state) => state.userRegister)
-    const {loading, error, userInfo} = userRegister    
+    const { loading, error, userInfo } = userRegister
 
     const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
-        if(userInfo){
+        if (userInfo) {
             history.push(redirect)
         }
     }, [history, userInfo, redirect])
+
     const submitHandler = (e) => {
         e.preventDefault()
-        if(name === ""){
+        if (name === "") {
             setMessage('Name can not be empty')
-        }else if(email === ""){
+        } else if (email === "") {
             setMessage('Email can not be empty')
-        }else if(password === ""){
+        } else if (password === "") {
             setMessage('Password can not be empty')
-        }else if(confirmPassword === ""){
+        } else if (password.length < 6) {
+            setMessage('Password is too short')
+        } else if (password.search(/[0-9]/)===-1) {
+            setMessage('Password must contains at least one number')
+        } else if (password.search(/[A-Z]/)===-1) {
+            setMessage('Password must contains at least one Uppercase character')
+        } else if (confirmPassword === "") {
             setMessage('Confirm password can not be empty')
-        }else if(password !== confirmPassword){
+        } else if (password !== confirmPassword) {
             setMessage('Passwords do not match')
-        }else{
+        } else {
             dispatch(register(name, email, password))
         }
     }
@@ -50,7 +57,7 @@ const RegisterScreen = ({ location,history }) => {
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
-            <Form.Group controlId='name'>
+                <Form.Group controlId='name'>
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         type='name'
@@ -79,7 +86,7 @@ const RegisterScreen = ({ location,history }) => {
 
                 <small>Password must contains :</small>
                 <ul>
-                    <li>6-12 characters</li>
+                    <li>Password must have at least 6 letters  characters</li>
                     <li>Uppercase</li>
                     <li>Number</li>
                 </ul>
@@ -91,14 +98,14 @@ const RegisterScreen = ({ location,history }) => {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
                 </Form.Group>
-                <br/>
+                <br />
                 <Button type='submit' variant='primary'>Register</Button>
             </Form>
             <Row className='py-3'>
                 <Col>
-                    Have an account?{' '} 
+                    Have an account?{' '}
                     <Link to={redirect ? `/login?redirect=${redirect}`
-                    : '/login'}>Login</Link>
+                        : '/login'}>Login</Link>
                 </Col>
             </Row>
         </FormContainer>
