@@ -7,7 +7,7 @@ const DateFoodFilter = ({ history }) => {
     const submitHandler = (e) => {
         e.preventDefault()
         if (keydate) {
-            history.push(`/datefilter/${keydate}`)
+            history.push(`/foodfilter/${keydate}`)
         } else {
             history.push('/admin/foodorderlist')
         }

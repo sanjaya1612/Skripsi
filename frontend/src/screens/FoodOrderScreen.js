@@ -81,7 +81,7 @@ const FoodOrderScreen = ({ match, history }) => {
                         <ListGroup.Item>
                             <h2>Shipping to : </h2>
                             <>
-                                <strong>Name:</strong> {order.user.name}
+                                <strong>Name:</strong> {localStorage.getItem("FullName")}
                                 <br />
                                 <strong>Addres: </strong>
                                 {order.shippingAddress.address},

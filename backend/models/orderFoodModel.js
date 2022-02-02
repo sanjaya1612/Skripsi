@@ -19,6 +19,10 @@ const orderFoodSchema = mongoose.Schema({
             image: { type: String, required: true },
         }
     ],
+    fullName: {
+        type: String,
+        required: true,
+    },
     shippingAddress: {
         address: { type: String, required: true },
         city: { type: String, required: true },

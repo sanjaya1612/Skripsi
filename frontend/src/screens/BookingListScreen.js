@@ -7,6 +7,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listBookings } from '../actions/bookingHotelAction'
 import NumberFormat from 'react-number-format'
+import BookingFilter from '../components/BookingFilter'
 
 const BookingListScreen = ({ history, match }) => {
     // const keydate = match.params.keydate
@@ -34,7 +35,7 @@ const BookingListScreen = ({ history, match }) => {
         <>
 
             <h1>Hotel Booking List</h1>
-            {/* <Route render={({ history }) => <ActivityDateFilter history={history}/>}/> */}
+            <Route render={({ history }) => <BookingFilter history={history}/>}/>
             <br/>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
                 : (

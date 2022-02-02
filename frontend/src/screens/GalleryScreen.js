@@ -6,14 +6,13 @@ import { Link } from 'react-router-dom'
 import TopCarousel from '../components/TopCarousel'
 import DestinationChoice from '../components/DestinationChoice'
 
-const GalleryScreen = ({ match }) => {
-  const keyword = match.params.keyword
+const GalleryScreen = () => {
   const dispatch = useDispatch()
 
  
 
   useEffect(() => {
-    dispatch(listGalleries(keyword))
+    dispatch(listGalleries())
   }, [dispatch])
   return (
     <>

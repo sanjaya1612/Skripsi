@@ -19,17 +19,18 @@ const FoodPlaceOrderScreen = ({ history }) => {
     cart.totalPrice = Number(cart.itemsPrice + cart.shippingPrice + cart.taxPrice)
 
     const orderFoodCreate = useSelector((state) => state.orderFoodCreate)
-    const {order, success} = orderFoodCreate
+    const { order, success } = orderFoodCreate
 
     useEffect(() => {
-         if (success){
-             history.push(`/foodorders/${order._id}`)
-         }
-         // eslint-disable-next-line
+        if (success) {
+            history.push(`/foodorders/${order._id}`)
+        }
+        // eslint-disable-next-line
     }, [history, success])
     const foodPlaceOrderHandler = () => {
         dispatch(createFoodOrder({
             orderItems: cart.cartItems,
+            fullName: localStorage.getItem("FullName"),
             shippingAddress: cart.shippingAddress,
             paymentMethod: cart.paymentMethod,
             itemsPrice: cart.itemsPrice,
@@ -48,6 +49,9 @@ const FoodPlaceOrderScreen = ({ history }) => {
                         <ListGroup.Item>
                             <h3>Shipping</h3>
                             <>
+                                <strong>Name : </strong>
+                                {localStorage.getItem("FullName")}
+                                <br/>
                                 <strong>Addres: </strong>
                                 {cart.shippingAddress.address},
                                 {' '}{cart.shippingAddress.city},

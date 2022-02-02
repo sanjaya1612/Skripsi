@@ -9,6 +9,7 @@ const ShippingScreen = ({ history }) => {
     const cart = useSelector(state => state.cart)
     const { shippingAddress } = cart
 
+    const [fullName, setFullname] = useState("")
     const [address, setAddress] = useState(shippingAddress.address)
     const [city, setCity] = useState(shippingAddress.city)
     const [province, setProvince] = useState(shippingAddress.province)
@@ -18,7 +19,8 @@ const ShippingScreen = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(saveShippingAddress({ address, city, province, postalCode }))
+        localStorage.setItem("FullName", fullName)
+        dispatch(saveShippingAddress({ address, city, province, postalCode}))
         history.push('/foodpayment')
     }
 
@@ -26,6 +28,15 @@ const ShippingScreen = ({ history }) => {
         <FoodSteps step1 step2 />
         <h2>Shipping</h2>
         <Form onSubmit={submitHandler}>
+        <Form.Group controlId='address'>
+                <Form.Label>Full Name</Form.Label>
+                <Form.Control
+                    type='text'
+                    placeholder='Enter your name'
+                    value={fullName}
+                    required
+                    onChange={(e) => setFullname(e.target.value)}></Form.Control>
+            </Form.Group>
             <Form.Group controlId='address'>
                 <Form.Label>Address</Form.Label>
                 <Form.Control

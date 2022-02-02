@@ -19,7 +19,7 @@ const AllGalleryScreen = ({ match }) => {
 
     useEffect(() => {
         dispatch(listGalleries(keyword))
-    }, [dispatch])
+    }, [dispatch, keyword])
     return (
     <>
     <Link to='/galleries'><i class="fas fa-arrow-left"></i></Link>

@@ -34,7 +34,7 @@ const ActivityPlaceOrderScreen = ({ history }) => {
     const activityPlaceOrderHandler = () => {
         dispatch(createOrder({
             orderItems: product.name,
-            qty: localStorage.Qty,
+            qty: localStorage.Qty, 
             date: localStorage.getItem("Date"), 
             phoneNumber: booking.phoneNumber,
             fullName: booking.fullName,

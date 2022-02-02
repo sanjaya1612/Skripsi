@@ -4,6 +4,7 @@ import OrderFood from '../models/orderFoodModel.js'
 const addFoodItems = asyncHandler(async (req, res) => {
     const {
         orderItems,
+        fullName,
         shippingAddress, 
         paymentMethod,
         itemsPrice,
@@ -20,6 +21,7 @@ const addFoodItems = asyncHandler(async (req, res) => {
         const orderFood = new OrderFood({
             orderItems,
             user: req.user._id,
+            fullName,
             shippingAddress,
             paymentMethod,
             itemsPrice,

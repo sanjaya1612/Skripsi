@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
-const DateFoodFilter = ({ history }) => {
+const BookingFilter = ({ history }) => {
     const [keydate, setKeydate] = useState('')
 
     const submitHandler = (e) => {
@@ -34,4 +34,4 @@ const DateFoodFilter = ({ history }) => {
     )
 };
 
-export default DateFoodFilter;
+export default BookingFilter;
