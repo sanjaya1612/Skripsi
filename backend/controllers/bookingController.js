@@ -81,8 +81,14 @@ const getMyBookings = asyncHandler(async (req, res) => {
 })
 
 const getBookings = asyncHandler(async (req, res) => {
-    const orders = await Booking.find({}).populate('user', 'id name') 
-    res.json(orders)
+    const keydate = req.query.keydate ? {
+        fullName: {
+            $regex: req.query.keydate,
+            $options: 'i'
+        }
+    } : {}
+    const orders = await Booking.find({ ...keydate }).populate('user', 'id name') 
+    res.json(orders) 
 })
 
 export {addBookingItems, getBookingById, updateBookingToPaid, getMyBookings, getBookings}

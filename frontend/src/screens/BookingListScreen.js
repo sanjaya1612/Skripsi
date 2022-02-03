@@ -10,7 +10,7 @@ import NumberFormat from 'react-number-format'
 import BookingFilter from '../components/BookingFilter'
 
 const BookingListScreen = ({ history, match }) => {
-    // const keydate = match.params.keydate
+    const keydate = match.params.keydate
 
     const dispatch = useDispatch()
 
@@ -24,11 +24,11 @@ const BookingListScreen = ({ history, match }) => {
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            dispatch(listBookings())
+            dispatch(listBookings(keydate))
         } else {
             history.push('/login')
         }
-    }, [dispatch, history, userInfo ])
+    }, [dispatch, history, userInfo, keydate ])
 
     
     return (

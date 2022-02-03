@@ -145,7 +145,7 @@ export const listMyBookings = () => async (dispatch, getState) => {
     }
 }
 
-export const listBookings = () => async (dispatch, getState) => {
+export const listBookings = (keydate = '') => async (dispatch, getState) => {
     try {
         dispatch({
             type: BOOKING_LIST_REQUEST,
@@ -155,11 +155,11 @@ export const listBookings = () => async (dispatch, getState) => {
         const config = {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`,
-            }
+            } 
         }
 
         const { data } = await axios.get(
-            `/api/bookings`, config
+            `/api/bookings?keydate=${keydate}`, config
         )
         dispatch({
             type:BOOKING_LIST_SUCCESS,

@@ -9,7 +9,7 @@ const BookingFilter = ({ history }) => {
         if (keydate) {
             history.push(`/bookingfilter/${keydate}`)
         } else {
-            history.push('/admin/foodorderlist')
+            history.push('/admin/hotelbookinglist')
         }
     }
     return (

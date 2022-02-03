@@ -118,6 +118,7 @@ function App() {
           <Route path='/search-allgallery/:keyword' component={AllGalleryScreen} />
           <Route path='/foodfilter/:keydate' component={OrderFoodListScreen} />
           <Route path='/activityfilter/:keydate' component={OrderListScreen} />
+          <Route path='/bookingfilter/:keydate' component={BookingListScreen} />
           <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>
